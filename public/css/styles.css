@@ -102,16 +102,18 @@ input:hora{
     top:240px;
 }
 
+/* .as Tela permuta */
 .as{
     position: absolute;
-    top: 287px;
+    top: 270px;
     margin-left: 250px;
 }
 
+/* .ass Tela dispensa  */ 
 .ass{
     position: relative;
     margin-top: -68px;
-    margin-left: 200px;
+    margin-left: 225px;
     margin-right: 78%;
 }
 
@@ -221,7 +223,7 @@ input#rgsus{
 .cidadesus{
     position: relative;
     top: -7px;
-    margin-left: 100px;
+    margin-left: 140px;
     margin-right: 70%;
 }
 
@@ -271,8 +273,8 @@ input#crimesus{
 
 .sexo{
     position: relative;
-    top: 40px;
-    left: 228px;
+    top: 44px;
+    left: 350px;
     width: 100px ;
 }
 
@@ -571,7 +573,7 @@ div#spo{
     text-align: center;
     border: 1px solid black;
     top: -70px;  
-    left: 900px;  
+    left: 1600px;  
     padding: 5px;
     padding-top: 5px;
     line-height: -320pt;
