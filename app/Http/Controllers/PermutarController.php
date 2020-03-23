@@ -76,6 +76,7 @@ class PermutarController extends Controller
             $permutas->assinaturaSPO = "";
             $permutas->optCMD = "";
             $permutas->assinaturaCMD = "";
+            $permutas->dataConfirmacao ="";
             $permutas->save();
             return redirect()->route('permutas.index');
         }
@@ -178,6 +179,7 @@ class PermutarController extends Controller
             $permuta->assinaturaSPO = "";
             $permuta->optCMD = "";
             $permuta->assinaturaCMD = "";
+            $permuta->dataConfirmacao ="";
             $permuta->save();
             return redirect()->route('permutas.index');
         }
@@ -233,9 +235,10 @@ class PermutarController extends Controller
     public function CMD($id)
     {
         DB::table('permutars')->where('id', $id)->update([
-            'status'    => 'Confirmada e Finalizada',
-            'optCMD'       => 'Deferimento',
-            'assinaturaCMD' => Auth::user()->nome
+            'status'            => 'Confirmada e Finalizada',
+            'optCMD'            => 'Deferimento',
+            'dataConfirmacao'   => now(),
+            'assinaturaCMD'     => Auth::user()->nome
         ]);
 
         return redirect()->route('home');

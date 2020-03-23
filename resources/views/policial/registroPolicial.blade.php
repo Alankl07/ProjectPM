@@ -4,8 +4,8 @@
     <div class="registropolicial">
         <div class="registropolicia">
             <p style="font-weight: bold;" class="registron">NOME:<br><p class="registronome">{{$policial->nome}}</p></p>
-            <p style="font-weight: bold;" class="registrof"><br> <img style="width: 100px; height: 100px;" src="../storage/{{$policial->foto}}"/></p>
-            <p style="font-weight: bold;" class="registrom">DATA DE NASCIMENTO:<br><p class="registromatricula">{{ date('d/m/Y', strtotime($policial->dataNascimento))}}</p></p>
+            <p style="font-weight: bold;" class="registrof"><br> <img style="width: 100px; height: 100px;" src="/storage/{{$policial->foto}}"/></p>
+            <p style="font-weight: bold;" class="registrom">  DATA DE NASCIMENTO:<br><p class="registromatricula">{{ date('d/m/Y', strtotime($policial->dataNascimento))}}</p></p>
             <p style="font-weight: bold;" class="registropa">PATENTE:<br><p class="registropatente">{{$policial->patente}}</p></p>
             <p style="font-weight: bold;" class="registrom">MATRÍCULA:<br><p class="registromatricula">{{$policial->matricula}}</p></p>
             <P style="font-weight: bold;" class="registros">SEXO:<br><p class="registrosexo">{{$policial->sexo}}</p></P>

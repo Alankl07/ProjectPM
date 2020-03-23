@@ -5,10 +5,6 @@
 	//Criando a Instancia
 	$dompdf = new Dompdf();
 
-    $dataSPO =  date('d/m/Y', strtotime($permuta->dataSPO));
-    $dia_do_servico = date('d/m/Y', strtotime($permuta->dia_do_servico));
-    $escaladoDia_do_servico = date('d/m/Y', strtotime($permuta->escaladoDia_do_servico));
-
     $pagina = "
     <!DOCTYPE html>
     <html lang='pt-br'>
@@ -17,6 +13,7 @@
             <title>Permuta</title>
             <link href='css/personalizado.css' rel='stylesheet'>
             <link rel='stylesheet' type='text/css' href='css/styles.css'>
+            <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
         </head>
     <div id='spo' style='left: 50px'>
     <p id='via' style='position: relative; top: -60px' >VIA DA SPO</p>

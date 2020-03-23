@@ -25,6 +25,9 @@ class CreateAbonosTable extends Migration
             $table->string('das');
             $table->string('as');
             $table->string('status');
+            $table->string('dataConfirmacao');
+            $table->string('assinaturaCMD');
+            $table->string('dataConfirmacaoCMD');
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@
     <html lang='pt-br'>
         <head>
             <meta charset='utf-8'>
-            <title>Permuta</title>
+            <title>Dispença</title>
             <link href='css/personalizado.css' rel='stylesheet'>
             <link rel='stylesheet' type='text/css' href='css/styles.css'>
         </head>

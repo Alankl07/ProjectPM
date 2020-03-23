@@ -1,9 +1,10 @@
 @extends('inicial')
 
 @section('body')
-<form action="{{route('abono.store')}}" method="POST">
+<form action="{{route('abono.update', $abono)}}" method="post">
         @csrf
-        <h1>Abono de Serviço</h1>
+        @method('PUT')
+        <h1>Refazer Abono</h1>
         <div id="div_ab">
             <div class="formulario pl-5 ">
                 <div class="nomeabono col-3 {{$errors->has('nome') ? 'has-error' : ''}}">
@@ -63,9 +64,17 @@
                         </span>
                     @endif
                 </div>
-                
+                <div class="col-2 {{$errors->has('data') ? 'has-error' : ''}}">
+                    <label for="data">Data</label>
+                    <input type="date" name="data" class="form-control" value="{{old('data')}}" id="data">
+                    @if($errors->has('data'))
+                        <span class="help-block" style="color:red">
+                            {{$errors->first('data')}}
+                        </span>
+                    @endif
+                </div>
                 <div class="horario col-2 {{$errors->has('horario') ? 'has-error' : ''}}">
-                    <label for="horario">Horario:</label>
+                    <label for="horario">Dàs:</label>
                     <input class="form-control" type="time" name="horario" id="horario" value="{{old('horario')}}">
                     @if($errors->has('horario'))
                         <span class="help-block" style="color: red">
@@ -74,13 +83,16 @@
                     @endif
                 </div>
                 <div class="horario2 col-2 pl-3  pt-2 {{$errors->has('as') ? 'has-error' : ''}}">
-                    <label for="as">Até as:</label>
+                    <label for="as">Até às:</label>
                     <input class="form-control" type="time" name="as" value="{{old('horario')}}" id="as">
                     @if($errors->has('as'))
                         <span class="help-block" style="color: red">
                             {{$errors->first('as')}}
                         </span>
                     @endif
+                </div>
+                <div class="btnab pt-2 pl-3 " >
+                    <button id="btnab" class="btn btn-primary" >Solicitar</button>
                 </div>
             </div>
         </div>

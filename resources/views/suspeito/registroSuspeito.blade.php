@@ -5,7 +5,7 @@
         <div class="registrosus"> 
             <h2 style="text-align: center; margin-top: 10px;">Registro do Suspeito</h2>
             <p style="font-weight: bold;" class="registroSn">NOME:<br><p class="registronome">{{$suspeito->nome}}</p></p>
-            <p style="font-weight: bold;" class="registroSf"><br> <img style="width: 100px; height: 100px;" src="../storage/{{$suspeito->foto}}"/></p>
+            <p style="font-weight: bold;" class="registroSf"><br> <img style="width: 100px; height: 100px;" src="/storage/{{$suspeito->foto}}"/></p>
             <p style="font-weight: bold;" class="registroSv">VULGO:<br><p class="registrovulgo">{{$suspeito->vulgo}}</p></p>
             <P style="font-weight: bold;" class="registroSex">SEXO:<br><p class="registroSsexo">{{$suspeito->sexo}}</p></P>
             <P style="font-weight: bold;" class="registroSdata">DATA DE NASCIMENTO:<br><p class="registrodatan">{{date( 'd/m/Y' , strtotime($suspeito->dataNascimento))}}</p></P>

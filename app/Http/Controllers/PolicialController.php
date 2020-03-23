@@ -40,21 +40,32 @@ class PolicialController extends Controller
      */
     public function store(Request $request)
     {
+        $validacao = $this->Validator($request->all());
+        if($validacao->fails())
+        {
+            return redirect()->back()
+            ->withErrors($validacao->errors())
+            ->withInput($request->all());
+        }
+
+        
+        $path=$request->file("foto")->store('imagens', 'public');
+
         DB::table('users')->insert([
             'nome'              => $request->nome,
             'matricula'         => $request->matricula,
-            'foto'              => $request->foto,
+            'foto'              => $path,
+            'chefedeSetor'      => $request->rad,
+            'setor'             => $request->setor,
             'patente'           => $request->patente,
             'dataNascimento'    => $request->dataNascimento,
             'sexo'              => $request->sexo,
-            'chefedeSetor'      => $request->rad,
-            'setor'             => $request->setor,
             'cidade'            => $request->cidade,
             'estado'            => $request->estado,
             'pelotao'           => $request->pelotao,
             'rg'                => $request->rg,
             'cpf'               => $request->cpf,
-            'senha'             => $request->senha,
+            'password'          => bcrypt($request->senha),
         ]);
         return redirect()->route('policial.index');
     }

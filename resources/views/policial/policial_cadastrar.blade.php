@@ -1,7 +1,7 @@
 @extends('inicial')
 
 @section('body')
-    <form action="{{route('create')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('policial.store')}}" method="post" enctype="multipart/form-data">
         <h1>Cadastro Policial</h1>
         @csrf
         <div id="div_pol">

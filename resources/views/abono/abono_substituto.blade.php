@@ -1,9 +1,8 @@
 @extends('inicial')
 
 @section('body')
-<form action="{{route('abono.update', $abono)}}" method="POST">
+<form action="{{route('sub', $abono)}}" method="GET">
         @csrf
-        @method('PUT')
         <h1>Abono de Serviço Substituto</h1>
         <div id="div_ab">
             <div class="formulario pl-5 ">
@@ -50,7 +49,7 @@
                     <input readonly class="form-control" type="time" name="as" value="{{$abono->as}}" id="as">
                     
                 </div>
-                <a onclick="confirma()" id="btndispensa" class="btn btn-primary">OK</a>
+                <a onclick="confirma()" id="btndispensa" class="btn btn-primary">Confirmar</a>
             </div>
         </div>
         <div id="popupcx">

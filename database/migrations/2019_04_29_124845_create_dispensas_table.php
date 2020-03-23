@@ -24,6 +24,12 @@ class CreateDispensasTable extends Migration
             $table->string('hora_final');
             $table->string('virtude');
             $table->string('Status');
+            $table->string('assinaturaSPO');
+            $table->string('dataSPO');
+            $table->string('assinaturaCMD');
+            $table->string('optCMD');
+            $table->string('dataConfirmacao');
+            $table->string('dataConfirmacaoCMD');
             $table->timestamps();
         });
     }

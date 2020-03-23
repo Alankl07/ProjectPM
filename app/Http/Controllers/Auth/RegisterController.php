@@ -64,15 +64,18 @@ class RegisterController extends Controller
             ->withInput($request->all());
         }
 
+        
+        $path=$request->file("foto")->store('imagens', 'public');
+
         DB::table('users')->insert([
             'nome'              => $request->nome,
             'matricula'         => $request->matricula,
-            'foto'              => $request->foto,
+            'foto'              => $path,
+            'chefedeSetor'      => $request->rad,
+            'setor'             => $request->setor,
             'patente'           => $request->patente,
             'dataNascimento'    => $request->dataNascimento,
             'sexo'              => $request->sexo,
-            'chefedeSetor'      => $request->rad,
-            'setor'             => $request->setor,
             'cidade'            => $request->cidade,
             'estado'            => $request->estado,
             'pelotao'           => $request->pelotao,
@@ -80,7 +83,6 @@ class RegisterController extends Controller
             'cpf'               => $request->cpf,
             'password'          => bcrypt($request->senha),
         ]);
-
         return redirect()->route('home');
         
     }
@@ -95,10 +97,13 @@ class RegisterController extends Controller
             ->withInput($request->all());
         }
 
+        
+        $path=$request->file("foto")->store('imagens', 'public');
+        
         DB::table('users')->insert([
             'nome'              => $request->nome,
             'matricula'         => $request->matricula,
-            'foto'              => $request->foto,
+            'foto'              => $path,
             'chefedeSetor'      => $request->rad,
             'setor'             => $request->setor,
             'patente'           => $request->patente,

@@ -60,6 +60,8 @@ class DispensaController extends Controller
             $dispensa->dataSPO = "";
             $dispensa->assinaturaCMD = "";
             $dispensa->optCMD = "";
+            $dispensa->dataConfirmacao ="";
+            $dispensa->dataConfirmacaoCMD = "";
             $dispensa->save();
             return redirect()->route('dispensa.index');
         }
@@ -113,6 +115,8 @@ class DispensaController extends Controller
             $dispensa->dataSPO = "";
             $dispensa->assinaturaCMD = "";
             $dispensa->optCMD = "";
+            $dispensa->dataConfirmacao = "";
+            $dispensa->dataConfirmacaoCMD = "";
             $dispensa->save();
             return redirect()->route('dispensa.index');
         }
@@ -188,6 +192,7 @@ class DispensaController extends Controller
         DB::table('dispensas')->where('id', $id)->update([
             'Status'    => 'Confirmada e Finalizada',
             'optCMD'       => 'Deferimento',
+            'dataConfirmacaoCMD'   => now(),
             'assinaturaCMD' => Auth::user()->nome
         ]);
 

@@ -31,7 +31,8 @@
                 <p >com o,{{$permuta->escalado}}, Mat.:{{$permuta->escaladoMatricula}} que se encontra escalado no {{$permuta->escaladoLocal}}</p>
                 <p>no dia{{ date('d/m/Y', strtotime($permuta->escaladoDia_do_servico))}}, das {{$permuta->escaladoHora_inicial}} às {{$permuta->escaladoHora_final}}, tendo em vista{{$permuta->virtude}}</p>
                 <p><b>Declaro que a referida permuta está em conformidade com o preceituado no Art. 2º § 2º, Portaria N° 067 - CG/11.</b></p>
-                <p>Feira de Santana, ____/____/_____</p>
+                @if($permuta->dataConfirmacao == "")<p>Feira de Santana, ____/____/_____</p>@endif
+                @if($permuta->dataConfirmacao != "")<p>Feira de Santana, {{ date('d/m/Y', strtotime($permuta->dataConfirmacao))}}</p>@endif
                 <p style="position: relative; right:200px">{{$permuta->nome}}</p>
                 <p style="position: relative; top: -30px; right:200px">__________________________________</p>
                 <p style="position: relative; top: -30px; right:200px">Solicitante</p> 

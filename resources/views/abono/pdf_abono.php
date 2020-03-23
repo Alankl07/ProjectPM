@@ -1,11 +1,13 @@
-@extends('inicial')
-
-@section('body')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
 <div class="text-center">
-
-    @if($abono->status == "Nâo Autorizado")
-    <h1 style="color: red">Abono não autorizado</h1>
-    @endif
     <div style="position: relative; top: 50px; " >
         <div class="">
             <p style="margin: 0px auto"><b>POLÍCIA MILITAR DA BAHIA</b></p>
@@ -47,12 +49,8 @@
         </div>
 
         <div class="text-center">
-            @if($abono->dataConfirmacao == "")
-            <p>Em ____de_____________de_________,</p>
-            @else
             <p style="display: none">{{setlocale(LC_ALL, 'pt_BR')}}</p>
             <p>Em {{ date('d', strtotime($abono->dataConfirmacao))}} de {{ ucfirst(strftime('%B', strtotime($abono->dataConfirmacao)))}} de {{date('Y', strtotime($abono->dataConfirmacao))}} </p>
-            @endif
         </div>
         <div class="text-center" style="position: relative; top: 30px">
             <p style="margin: 0px auto">____________________________________________________________________________</p>
@@ -60,28 +58,15 @@
         </div>
         <div class="text-center" style="position: relative; top: 30px">
             <p style="margin: 20px auto">AUTORIZADO</p>
-            @if($abono->dataConfirmacaoCMD == "")
-            <p>Em ____/____/______</p>
-            @else
             <p style="position: relative; top: -20px">{{ date('d/m/Y', strtotime($abono->dataConfirmacaoCMD))}}</p>
-            @endif
-            @if($abono->status == 'Confirmado e Finalizado')
                 <p style="margin: -10px auto"><b>{{$abono->assinaturaCMD}}</b></p>
-            @endif
             <p style="margin: 0px auto">________________________________</p>
             <p>CMT DO PELOTÃO</p>
         </div>
-        
-        <div style="position: relative; margin: 50px">
-            @if(Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $abono->status == "Aguardando confirmação do CMD")
-                <a href="{{route('simAbonoCMD', $abono->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
-                <a href="{{route('naoAbonoCMD', $abono->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
-                <a href="{{route('refazerAbono', $abono->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Abono</a>
-            @endif
-        </div>
-        @if($abono->status == 'Confirmado e Finalizado')
-            <a href="{{route('imprimirAbono', $abono)}}" class="btn btn" style="position: relative; margin: 20px; height: 40px; width: 150px; color: white; background-color: blue;">IMPRIMIR</a>    
-        @endif
     </div>
 </div>
-@endsection('body')
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

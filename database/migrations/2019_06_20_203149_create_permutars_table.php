@@ -33,6 +33,7 @@ class CreatePermutarsTable extends Migration
             $table->string('assinaturaCMD');
             $table->string('virtude');
             $table->string('status');
+            $table->string('dataConfirmacao');
             $table->timestamps();
         });
     }
