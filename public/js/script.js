@@ -2,7 +2,19 @@ $(document).ready(function(){
     $('a[data-confirm]').click(function(ev){
         var href = $(this).attr('href');
         if(!$('#confirm-delete').length){
-            $('body').append('<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header bg-primary"><h5 class="modal-title" id="exampleModalLabel">Atenção!</h5><button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">Deseja realmente prosseguir com a ação ?</div><div class="modal-footer"><a id="dataComfirmOK" class="btn btn-success">Sim</a><button  class="btn btn-danger" data-dismiss="modal">Não</button></div></div></div></div>');
+            $('body').append('<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header bg-primary"><h5 class="modal-title" id="exampleModalLabel">Atenção!</h5><button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">Deseja realmente prosseguir com a ação ?</div><div class="modal-footer"><a id="dataComfirmOK" class="btn btn-success"  onclick="sucesso()" >Sim</a><button  class="btn btn-danger" data-dismiss="modal">Não</button></div></div></div></div>');
+        }
+        $('#dataComfirmOK').attr('href', href);
+        $('#confirm-delete').modal({shown: true});
+        return false;
+    });
+});
+
+$(document).ready(function(){
+    $('a[data-edit]').click(function(ev){
+        var href = $(this).attr('href');
+        if(!$('#confirm-delete').length){
+            $('body').append('<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header bg-primary"><h5 class="modal-title" id="exampleModalLabel">Atenção!</h5><button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">Deseja realmente prosseguir com a ação ?</div><div class="modal-footer"><a id="dataComfirmOK" class="btn btn-success" >Sim</a><button  class="btn btn-danger" data-dismiss="modal">Não</button></div></div></div></div>');
         }
         $('#dataComfirmOK').attr('href', href);
         $('#confirm-delete').modal({shown: true});
@@ -44,6 +56,10 @@ function sim(){
 
 function confirmarPermuta(){
     alert('Permuta confirmada, Aguardar liberação da SPO e do CMD de pelotão')
+}
+
+function sucesso(){
+    alert('Registro efetivado!')
 }
 
 

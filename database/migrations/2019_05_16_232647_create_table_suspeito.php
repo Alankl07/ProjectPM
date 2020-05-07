@@ -30,6 +30,7 @@ class CreateTableSuspeito extends Migration
             $table->string('nomePai');
             $table->string('nomeMae');
             $table->string('obs');
+            $table->string('status');
             $table->timestamps();
         });
     }

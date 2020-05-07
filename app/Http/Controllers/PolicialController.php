@@ -7,6 +7,7 @@ use App\Patente;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Util\Json;
 
 class PolicialController extends Controller
 {
@@ -65,6 +66,7 @@ class PolicialController extends Controller
             'pelotao'           => $request->pelotao,
             'rg'                => $request->rg,
             'cpf'               => $request->cpf,
+            'status'            => 'Ok',
             'password'          => bcrypt($request->senha),
         ]);
         return redirect()->route('policial.index');
@@ -121,6 +123,7 @@ class PolicialController extends Controller
             $policial->setor = $request->input('setor');
             $policial->cpf = $request->input("cpf");
             $policial->password = bcrypt($request->input("senha"));
+            $policial->status = 'Ok';
             $policial->save();
             return redirect()->route('policial.index');
         }
@@ -136,6 +139,21 @@ class PolicialController extends Controller
     {
         $policial->delete();
         return redirect()->route('policial.index');
+    }
+
+    public function list(){
+        $policial = User::all();
+
+       return response()->json($policial);
+    }
+
+    public function confirmarRegistro($id){
+        DB::table('users')->where('id', $id)->update([
+            'status' => 'Ok'
+        ]);
+
+
+        return redirect()->route('home');
     }
 
     public function Validator($data)

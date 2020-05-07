@@ -23,17 +23,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('home')}}">Início <span class="sr-only">(current)</span></a>
                     </li>
-                    @if(Auth::User()->setor == 'SPO' && Auth::User()->chefedeSetor == 'Sim' || Auth::User()->setor == 'PELOTÃO' && Auth::User()->chefedeSetor == "Sim")
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Cadastrar
                             </a>
                             <div  class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a id="dropdown" class="dropdown-item" href="{{route('suspeitos.create')}}">Cadastrar Suspeito</a>
-                                <a id="dropdown" class="dropdown-item" href="{{route('policial.create')}}">Cadastrar Policial</a>            
+                                @if(Auth::user()->setor == 'SPO')
+                                <a id="dropdown" class="dropdown-item" href="{{route('policial.create')}}">Cadastrar Policial</a>
+                                @endif            
                             </div>
                         </li>
-                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Solicitações
@@ -51,10 +51,8 @@
                         </a>
                         <div id="dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            @if(Auth::User()->setor == 'SPO' && Auth::User()->chefedeSetor == 'Sim' || Auth::User()->setor == 'PELOTÃO' && Auth::User()->chefedeSetor == 'Sim')
                                 <a id="dropdown" class="dropdown-item" href="{{route('index')}}">Permutas</a>
                                 <a id="dropdown" class="dropdown-item" href="{{route('policial.index')}}">Policial</a>
-                            @endif
                             <a id="dropdown" class="dropdown-item" href="{{route('suspeitos.index')}}">Suspeito</a>
                             <a id="dropdown" class="dropdown-item" href="{{route('permutas.index')}}">Permutas Solicitadas</a>
                             <a id="dropdown" class="dropdown-item" href="{{route('dispensa.index')}}">Dispensa Solicitadas</a>
@@ -63,7 +61,7 @@
                     </li>         
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{Auth::User()->nome}} <span class="caret"></span>
+                             <span class="caret">{{(Auth::user()->nome)}}</span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

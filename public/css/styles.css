@@ -1,3 +1,8 @@
+body{
+    overflow-x:hidden;
+    overflow-x:hidden ;
+    overflow-y:auto ;
+}
 
 
 .img2{
@@ -505,11 +510,7 @@ input#estadopol{
     background-color: rgba(0, 0, 0, 0.1)
 }
 
-.btnpol{
-    position: absolute;
-    margin-left: 83%;
-    margin-top: 4%;
-}
+
 
 .pelotaopol{
     flex: auto;
@@ -538,6 +539,8 @@ button#btnpol{
     top: -132px;
     left: 20px;
     width: 200px;
+    height: 68px;
+    margin-bottom: 0;
 }
 
 .confirmarsen{
@@ -545,10 +548,22 @@ button#btnpol{
     top: -200px;
     left: 19%;
     width: 200px;
+    height: 68px;
+    margin-bottom: 0;
 }
 
 input#senhap{
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btnpol{
+    position: relative;
+    left: 83%;
+    margin-right: 100px;
+    top: -258px;
+    width: 10%;
+    height: 100px;
+    margin-bottom: 0;
 }
 
 /*TELA PERMUTA*/
@@ -1081,6 +1096,28 @@ li#tabela2{
     height: 50px;
 }
 
+#btnConfSus{
+    display: grid;
+    box-sizing: 150px;
+    color: white;
+    border: #b1b0b0;
+    margin-right: 20px;
+    width: 200px;
+    margin: 5px;
+}
+
+#btnEditSus{
+    display: inline;
+    box-sizing: 150px;
+    color: white;
+    border: #b1b0b0;
+    margin-right: 20px;
+    background-color: #2147CC;
+    width: 200px;
+    margin: 10px;
+}
+
+
 
 /* Configurações de errors */
 
@@ -1139,4 +1176,25 @@ div#popupimg{
 .tabelaAbono{
     position: relative;
     left: 20%;
+}
+
+/*TELA LISTA POLICIAIS*/
+
+#btnConf{
+    display: inline;
+    box-sizing: 150px;
+    color: white;
+    border: #b1b0b0;
+    float: right;
+    margin-right: 20px;
+}
+
+#btnEdit{
+    display: inline;
+    box-sizing: 150px;
+    color: white;
+    border: #b1b0b0;
+    float: right;
+    margin-right: 20px;
+    background-color: #2147CC;
 }

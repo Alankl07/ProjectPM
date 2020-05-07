@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Suspeito;
 use App\Crime;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +23,6 @@ class SuspeitoController extends Controller
         $suspeito = Suspeito::all();
         $crimes = Crime::all();
         return view('suspeito/lista_suspeito', compact('suspeito'));
-        
     }
 
 
@@ -43,34 +44,62 @@ class SuspeitoController extends Controller
      */
     public function store(Request $request)
     {
-        $validacao = $this->Validator($request->all());
-        if($validacao->fails())
-        {
-            return redirect()->back()
-            ->witherrors($validacao->errors())
-            ->withInput($request->all());
-        }
-        else
-        {
-            $sus = new Suspeito();
-            $sus->nome = $request->input('nome');
-            $sus->vulgo = $request->input('vulgo');
-            $sus->cpf = $request->input('cpf');
-            $sus->rg = $request->input('rg');
-            $sus->sexo = $request->input('sexo');
-            $sus->estado = $request->input('estado');
-            $sus->cidade = $request->input('cidadesus');
-            $sus->endereco = $request->input('enderecosus');
-            $sus->quantidadeCrime = '';
-            $sus->localAtuacao = $request->input('localAtuacao');
-            $sus->dataNascimento = $request->input('dataNascimento');
-            $path=$request->file("foto")->store('imagens', 'public');
-            $sus->foto = $path;
-            $sus->nomePai = $request->input('nomePai');
-            $sus->nomeMae = $request->input('nomeMae');
-            $sus->obs = $request->input('descri');
-            $sus->save();
-            return redirect()->route('crimes.show', $sus);
+        if (Auth::user()->setor == "SOINT") {
+            $validacao = $this->Validator($request->all());
+            if ($validacao->fails()) {
+                return redirect()->back()
+                    ->witherrors($validacao->errors())
+                    ->withInput($request->all());
+            } else {
+                $sus = new Suspeito();
+                $sus->nome = $request->input('nome');
+                $sus->vulgo = $request->input('vulgo');
+                $sus->cpf = $request->input('cpf');
+                $sus->rg = $request->input('rg');
+                $sus->sexo = $request->input('sexo');
+                $sus->estado = $request->input('estado');
+                $sus->cidade = $request->input('cidadesus');
+                $sus->endereco = $request->input('enderecosus');
+                $sus->quantidadeCrime = '';
+                $sus->localAtuacao = $request->input('localAtuacao');
+                $sus->dataNascimento = $request->input('dataNascimento');
+                $path = $request->file("foto")->store('imagens', 'public');
+                $sus->foto = $path;
+                $sus->nomePai = $request->input('nomePai');
+                $sus->nomeMae = $request->input('nomeMae');
+                $sus->obs = $request->input('descri');
+                $sus->status = "Ok";
+                $sus->save();
+                return redirect()->route('crimes.show', $sus);
+            }
+        } else {
+            $validacao = $this->Validator($request->all());
+            if ($validacao->fails()) {
+                return redirect()->back()
+                    ->witherrors($validacao->errors())
+                    ->withInput($request->all());
+            } else {
+                $sus = new Suspeito();
+                $sus->nome = $request->input('nome');
+                $sus->vulgo = $request->input('vulgo');
+                $sus->cpf = $request->input('cpf');
+                $sus->rg = $request->input('rg');
+                $sus->sexo = $request->input('sexo');
+                $sus->estado = $request->input('estado');
+                $sus->cidade = $request->input('cidadesus');
+                $sus->endereco = $request->input('enderecosus');
+                $sus->quantidadeCrime = '';
+                $sus->localAtuacao = $request->input('localAtuacao');
+                $sus->dataNascimento = $request->input('dataNascimento');
+                $path = $request->file("foto")->store('imagens', 'public');
+                $sus->foto = $path;
+                $sus->nomePai = $request->input('nomePai');
+                $sus->nomeMae = $request->input('nomeMae');
+                $sus->obs = $request->input('descri');
+                $sus->status = "Pendente";
+                $sus->save();
+                return redirect()->route('crimes.show', $sus);
+            }
         }
     }
 
@@ -112,7 +141,8 @@ class SuspeitoController extends Controller
      */
     public function update(Request $request, Suspeito $suspeito)
     {
-        $suspeito->nome = $request->input('nome');
+        if(Auth::user()->setor == "SOINT"){
+            $suspeito->nome = $request->input('nome');
         $suspeito->vulgo = $request->input('vulgo');
         $suspeito->cpf = $request->input('cpf');
         $suspeito->rg = $request->input('rg');
@@ -123,13 +153,44 @@ class SuspeitoController extends Controller
         $suspeito->quantidadeCrime = '';
         $suspeito->localAtuacao = $request->input('localAtuacao');
         $suspeito->dataNascimento = $request->input('dataNascimento');
-        $path=$request->file("foto")->store('imagens', 'public');
+        $path = $request->file("foto")->store('imagens', 'public');
         $suspeito->foto = $path;
         $suspeito->nomePai = $request->input('nomePai');
         $suspeito->nomeMae = $request->input('nomeMae');
         $suspeito->obs = $request->input('descri');
+        $suspeito->status = "Ok";
         $suspeito->save();
         return redirect()->route('suspeitos.index');
+        }else{
+            $suspeito->nome = $request->input('nome');
+        $suspeito->vulgo = $request->input('vulgo');
+        $suspeito->cpf = $request->input('cpf');
+        $suspeito->rg = $request->input('rg');
+        $suspeito->sexo = $request->input('sexo');
+        $suspeito->estado = $request->input('estado');
+        $suspeito->cidade = $request->input('cidadesus');
+        $suspeito->endereco = $request->input('enderecosus');
+        $suspeito->quantidadeCrime = '';
+        $suspeito->localAtuacao = $request->input('localAtuacao');
+        $suspeito->dataNascimento = $request->input('dataNascimento');
+        $path = $request->file("foto")->store('imagens', 'public');
+        $suspeito->foto = $path;
+        $suspeito->nomePai = $request->input('nomePai');
+        $suspeito->nomeMae = $request->input('nomeMae');
+        $suspeito->obs = $request->input('descri');
+        $suspeito->status = "Atualização Pendente";
+        $suspeito->save();
+        return redirect()->route('suspeitos.index');
+        }
+    }
+    
+    public function confirmarRegistroSuspeito($id){
+       DB::table('suspeitos') ->where('id', $id)->update([
+           'status'             =>  'Ok',
+           'quantidadeCrime'    =>  1,
+       ]);
+
+       return redirect()->route('home');
     }
 
     /**
@@ -146,7 +207,7 @@ class SuspeitoController extends Controller
 
     public function Validator($date)
     {
-        $regras=[
+        $regras = [
             'nome'                  => 'required',
             'vulgo'                 => 'required',
             'foto'                  => 'required',
@@ -163,7 +224,7 @@ class SuspeitoController extends Controller
             'descri'                => 'required',
         ];
 
-        $menssagens=[
+        $menssagens = [
             'nome.required'                     => 'Campo Nome é obrigatório',
             'vulgo.required'                    => 'Campo Vulgo é obrigatório',
             'foto.required'                     => 'Campo Foto é obrigatório',

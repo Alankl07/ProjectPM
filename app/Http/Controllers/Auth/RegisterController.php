@@ -114,6 +114,7 @@ class RegisterController extends Controller
             'pelotao'           => $request->pelotao,
             'rg'                => $request->rg,
             'cpf'               => $request->cpf,
+            'status'            => 'Pendente',
             'password'          => bcrypt($request->senha),
         ]);
         return redirect()->route('/');
