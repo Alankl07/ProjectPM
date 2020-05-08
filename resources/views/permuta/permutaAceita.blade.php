@@ -6,7 +6,7 @@
     <p id="via">VIA DA SPO</p>
     <p id="spo">AUTORIZO EM___/___/___ _____________________ Chefe da SPO</P>
     <div style="display: none"><input type="text" id="idPermuta" value="{{$permuta->id}}"></div>
-    @if(Auth::user()->setor == 'SPO' && Auth::user()->chefedeSetor == 'Sim' && $permuta->status != 'Aceita' && $permuta->status != "Confirmada pelo SPO")
+    @if(Auth::user()->setor == 'SPO' && Auth::user()->chefedeSetor == 'Sim' && $permuta->status == 'Confirmada')
     <div class="butaoSPO">
         <a href="{{route('spo', $permuta->id)}}" class="btn btn-primary" id="btnspoSim" data-confirm='data-confirm'>OK</a>
         <a href="{{route('nao', $permuta->id)}}" data-confirm='data-confirm' class="btn btn-primary" id="btnspoNao">Não</a>
@@ -17,7 +17,7 @@
 </div>
 <div class="cmd">
     <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( ) INDEFERIMENTO ( ) _____________________<br>CMD PEL</p>
-    @if(Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $permuta->status == "Confirmada pelo SPO")
+    @if(Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $permuta->status == "Confirmada" || Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $permuta->status == "Confirmada pelo SPO")
         <a href="{{route('cmd', $permuta->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
         <a href="{{route('naoCMD', $permuta->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
         <a href="{{route('refazer', $permuta->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Permuta</a>

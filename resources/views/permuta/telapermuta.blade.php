@@ -56,7 +56,7 @@
             </div>
             <div class="ass {{$errors->has('as') ? 'has-error' : ''}}">
                 <label for="hora">Às:</label>
-                <input type="time" class="form-control" name="as" value="{{old('as')}}" id="hora"  size=30> 
+                <input type="time" class="form-control" name="as" value="{{old('as')}}" id="ass"  size=50> 
                 @if($errors->has('as'))
                     <span class="help-block">
                         {{$errors->first('as')}}

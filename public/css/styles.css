@@ -114,6 +114,11 @@ input:hora{
     margin-left: 250px;
 }
 
+#ass{
+    width: 115px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 /* .ass Tela dispensa  */ 
 .ass{
     position: relative;

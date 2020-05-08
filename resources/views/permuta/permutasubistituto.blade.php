@@ -58,7 +58,7 @@
                 </div>
                 <div class="ass {{$errors->has('as') ? 'error-has' : '' }} ">
                     <label for="hora">Às:</label>
-                    <input readonly type="time" class="form-control" name="as" id="hora" value="{{$permuta->hora_final}}" > 
+                    <input readonly type="time" class="form-control" name="as" id="ass" value="{{$permuta->hora_final}}" > 
                     @if($errors->has('as'))
                         <span class="help-block">
                             {{$errors->first('as')}}
@@ -125,7 +125,7 @@
                 </div>
                 <div class="ass {{$errors->has('assub') ? 'has-error' : ''}} ">
                     <label for="hora">Às:</label>
-                    <input type="time" class="form-control" name="assub" value="{{old('assub')}}" id="hora"  size=30> 
+                    <input type="time" class="form-control" name="assub" value="{{old('assub')}}" id="ass"  size=30> 
                     @if($errors->has('assub'))
                         <span class="help-block">
                             {{$errors->first('assub')}}
