@@ -62,4 +62,26 @@ function sucesso(){
     alert('Registro efetivado!')
 }
 
+function Radiosim(){
+   var guarnicao = document.getElementById('Radioguarnicao')
+   var setor = document.getElementById('SetorTela2')
+   guarnicao.style.display = 'block'
+   setor.style.display = 'block'
+}
+
+function Radionao(){
+    var guarnicao = document.getElementById('Radioguarnicao')
+    var setor = document.getElementById('SetorTela2')
+    guarnicao.style.display = 'none'
+    setor.style.display = 'none'
+}
+
+var verificar = document.getElementById('sim')
+
+if(verificar.checked){
+    Radiosim()
+}else{
+    Radionao()
+}
+
 

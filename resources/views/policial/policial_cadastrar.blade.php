@@ -76,6 +76,8 @@
                 <label for="setor">Setor:</label>
                 <select name="setor" id="patente">
                     <option disabled selected>---SELECIONE SETOR---</option>
+                    <option name="setor">COMANDANTE</option>
+                    <option name="setor">SUBCOMANDANTE</option>
                     <option name="setor">SPO</option>
                     <option name="setor">SSO</option>
                     <option name="setor">CORSET</option>

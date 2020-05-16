@@ -71,8 +71,10 @@ class RegisterController extends Controller
             'nome'              => $request->nome,
             'matricula'         => $request->matricula,
             'foto'              => $path,
-            'chefedeSetor'      => $request->rad,
-            'setor'             => $request->setor,
+            'chefe'             => $request->rad,
+            'chefedoSetor'      => $request->setorChefe,
+            'chefedaGuarnicao'  => $request->Chefeguarnicao,
+            'setorAtuacao'      => $request->setor,
             'patente'           => $request->patente,
             'dataNascimento'    => $request->dataNascimento,
             'sexo'              => $request->sexo,
@@ -100,23 +102,47 @@ class RegisterController extends Controller
         
         $path=$request->file("foto")->store('imagens', 'public');
         
-        DB::table('users')->insert([
-            'nome'              => $request->nome,
-            'matricula'         => $request->matricula,
-            'foto'              => $path,
-            'chefedeSetor'      => $request->rad,
-            'setor'             => $request->setor,
-            'patente'           => $request->patente,
-            'dataNascimento'    => $request->dataNascimento,
-            'sexo'              => $request->sexo,
-            'cidade'            => $request->cidade,
-            'estado'            => $request->estado,
-            'pelotao'           => $request->pelotao,
-            'rg'                => $request->rg,
-            'cpf'               => $request->cpf,
-            'status'            => 'Pendente',
-            'password'          => bcrypt($request->senha),
-        ]);
+        if($request->setorChefe == null){
+            DB::table('users')->insert([
+                'nome'              => $request->nome,
+                'matricula'         => $request->matricula,
+                'foto'              => $path,
+                'chefe'             => $request->rad,
+                'chefedoSetor'      => '',
+                'chefedaGuarnicao'  => '',
+                'setorAtuacao'      => $request->setor,
+                'patente'           => $request->patente,
+                'dataNascimento'    => $request->dataNascimento,
+                'sexo'              => $request->sexo,
+                'cidade'            => $request->cidade,
+                'estado'            => $request->estado,
+                'pelotao'           => $request->pelotao,
+                'rg'                => $request->rg,
+                'cpf'               => $request->cpf,
+                'status'            => 'Pendente',
+                'password'          => bcrypt($request->senha),
+            ]);
+        }else{
+            DB::table('users')->insert([
+                'nome'              => $request->nome,
+                'matricula'         => $request->matricula,
+                'foto'              => $path,
+                'chefe'             => $request->rad,
+                'chefedoSetor'      => $request->setorChefe,
+                'chefedaGuarnicao'  => $request->Chefeguarnicao,
+                'setorAtuacao'      => $request->setor,
+                'patente'           => $request->patente,
+                'dataNascimento'    => $request->dataNascimento,
+                'sexo'              => $request->sexo,
+                'cidade'            => $request->cidade,
+                'estado'            => $request->estado,
+                'pelotao'           => $request->pelotao,
+                'rg'                => $request->rg,
+                'cpf'               => $request->cpf,
+                'status'            => 'Pendente',
+                'password'          => bcrypt($request->senha),
+            ]);
+        }
         return redirect()->route('/');
     }
 

@@ -64,6 +64,7 @@ class PermutarController extends Controller
             $permutas->dia_do_servico = $request->input('dia');
             $permutas->hora_inicial = $request->input('das');
             $permutas->hora_final = $request->input('as');
+            $permutas->setorAtuacao = Auth::user()->setorAtuacao;
             $permutas->escalado = "";
             $permutas->escaladoMatricula = "";
             $permutas->escaladoLocal = "";
@@ -163,6 +164,7 @@ class PermutarController extends Controller
         }else{
             $permuta->nome = $request->input('nome');
             $permuta->matricula = $request->input('matricula');
+            $permuta->setorAtuacao = $permuta->setorAtuacao;
             $permuta->local = $request->input('local');
             $permuta->dia_do_servico = $request->input('dia');
             $permuta->hora_inicial = $request->input('das');
@@ -196,7 +198,7 @@ class PermutarController extends Controller
             'status'    => 'Aceitar'
         ]);
         return redirect()->route('permutas.show', compact('id'));
-    }
+    } 
 
     public function atualizarStatus($id)
     {

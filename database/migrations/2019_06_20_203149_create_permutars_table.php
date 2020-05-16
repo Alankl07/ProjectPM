@@ -17,6 +17,7 @@ class CreatePermutarsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nome');
             $table->string('matricula');
+            $table->string('setorAtuacao');
             $table->string('local');
             $table->string('dia_do_servico');
             $table->string('hora_inicial');

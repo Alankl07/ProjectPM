@@ -9,6 +9,7 @@
       <th scope="col">Crime</th>
       <th scope="col">Data</th>
       <th scope="col">Comparsa</th>
+      <th scope="col">Conduzido por</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
         <td>{{$crimes->crime}}</td>
         <td>{{date( 'd/m/Y' , strtotime($crimes->data))}}</td>
         <td>{{$crimes->comparsa}}</td>
+        <td>{{$crimes->conduzido_por}}</td>
         <td>
         <form action = "{{route('crimes.destroy', $crimes)}}" method = "POST">
             @csrf

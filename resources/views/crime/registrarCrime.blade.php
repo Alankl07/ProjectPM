@@ -20,8 +20,8 @@
                 </div>
                 
                 <?php date_default_timezone_set('America/Sao_Paulo'); $now = new DateTime(); $datetime = $now->format('Y-m-d');?>
-                <div class="dataprisao">
-                    <label for="data">Data da prisão</label>
+                <div class="datacondução">
+                    <label for="data">Data da condução</label>
                     <input type="date" class="form-control" name="data" id="data" value="{{$datetime}}">
                 </div>
                 <div class="btnsus">

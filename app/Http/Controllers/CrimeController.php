@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Crime;
 use App\Suspeito;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use JsonIncrementalParser;
 
 class CrimeController extends Controller
 {
@@ -17,7 +19,7 @@ class CrimeController extends Controller
     {
         $crime = Crime::all();
         $suspeito = Suspeito::all();
-        foreach($suspeito as $suspeito);
+        foreach ($suspeito as $suspeito);
         return view('crime/lista_crime', compact('crime', 'suspeito'));
     }
 
@@ -28,7 +30,6 @@ class CrimeController extends Controller
      */
     public function create()
     {
-        
     }
 
 
@@ -40,14 +41,24 @@ class CrimeController extends Controller
      */
     public function store(Request $request)
     {
+        $suspeito = Suspeito::all();
         $crime = new Crime();
-        $crime->id_suspeito = $request->input('id');
-        $crime->suspeito = $request->input('susp');
-        $crime->comparsa = $request->input('comparsa');
-        $crime->crime    = $request->input('crime');
-        $crime->data     = $request->input('data');
+        $crime->id_suspeito     = $request->input('id');
+        $crime->suspeito        = $request->input('susp');
+        $crime->comparsa        = $request->input('comparsa');
+        $crime->crime           = $request->input('crime');
+        $crime->data            = $request->input('data');
+        $crime->conduzido_por   = $request->input("condutor");
         $crime->save();
-        return redirect()->route('suspeitos.index',compact('crime'));
+
+
+        foreach ($suspeito as $sus)
+            if ($sus->id == $crime->id_suspeito) {
+                DB::table('suspeitos')->where('id', $crime->id_suspeito)->update([
+                    'quantidadeCrime' => $sus->quantidadeCrime + 1
+                ]);
+                return redirect()->route('suspeitos.index', compact('crime'));
+            }
     }
 
     /**
@@ -65,10 +76,8 @@ class CrimeController extends Controller
     public function registrar($id)
     {
         $crimes = Crime::all();
-        foreach($crimes as $crime)
-        {
-            if($crime->id_suspeito == $id)
-            {
+        foreach ($crimes as $crime) {
+            if ($crime->id_suspeito == $id) {
                 return view('crime/registrarCrime', compact('crime', 'id'));
             }
         }
@@ -94,11 +103,12 @@ class CrimeController extends Controller
      */
     public function update(Request $request, Crime $crime)
     {
-        $crime->comparsa    = $request->input('comparsa');
-        $crime->crime       = $request->input('crime');
-        $crime->data        = $request->input('data');
+        $crime->comparsa        = $request->input('comparsa');
+        $crime->crime           = $request->input('crime');
+        $crime->data            = $request->input('data');
+        $crime->conduzido_por   = $request->input("condutor");
         $crime->save();
-        return redirect()->route('suspeitos.index',compact('crime'));
+        return redirect()->route('suspeitos.index', compact('crime'));
     }
 
     /**

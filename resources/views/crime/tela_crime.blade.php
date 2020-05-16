@@ -18,9 +18,13 @@
                 <label for="comparsa">comparsa</label>
                 <input type="text" class="form-control" name="comparsa" id="comparsa">
             </div>
+            <div class="comparsa">
+                <label for="condutor">Conduzido por: </label>
+                <input type="text" class="form-control" name="condutor" id="comparsa">
+            </div>
             
             <?php date_default_timezone_set('America/Sao_Paulo'); $now = new DateTime(); $datetime = $now->format('Y-m-d');?>
-            <div class="dataprisao">
+            <div class="datacondução">
                 <input class="form-control" name="data" type="hidden" value="{{$datetime}}">
             </div>
             <div class="btnsus">

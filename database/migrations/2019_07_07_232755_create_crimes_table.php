@@ -19,6 +19,7 @@ class CreateCrimesTable extends Migration
             $table->string('comparsa');
             $table->string('crime');
             $table->string('data');
+            $table->string('conduzido_por');
             $table->bigInteger('id_suspeito')->unsigned();
             $table->foreign('id_suspeito')->references('id')->on('suspeitos')->onDelete('cascade');
             $table->timestamps();

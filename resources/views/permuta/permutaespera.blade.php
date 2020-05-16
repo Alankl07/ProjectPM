@@ -24,6 +24,7 @@
                 @if($permuta->matricula != Auth::User()->matricula)
                     <a style="position: relative; top: -50px" data-confirm='data-confirm' class="btn btn-success" href="{{route('aceitar', $permuta)}}">Aceitar</a>
                 @endif
+
                 
             </div>
         </div>

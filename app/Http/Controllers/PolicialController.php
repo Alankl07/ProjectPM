@@ -42,33 +42,56 @@ class PolicialController extends Controller
     public function store(Request $request)
     {
         $validacao = $this->Validator($request->all());
-        if($validacao->fails())
-        {
+        if ($validacao->fails()) {
             return redirect()->back()
-            ->withErrors($validacao->errors())
-            ->withInput($request->all());
+                ->withErrors($validacao->errors())
+                ->withInput($request->all());
         }
 
-        
-        $path=$request->file("foto")->store('imagens', 'public');
 
-        DB::table('users')->insert([
-            'nome'              => $request->nome,
-            'matricula'         => $request->matricula,
-            'foto'              => $path,
-            'chefedeSetor'      => $request->rad,
-            'setor'             => $request->setor,
-            'patente'           => $request->patente,
-            'dataNascimento'    => $request->dataNascimento,
-            'sexo'              => $request->sexo,
-            'cidade'            => $request->cidade,
-            'estado'            => $request->estado,
-            'pelotao'           => $request->pelotao,
-            'rg'                => $request->rg,
-            'cpf'               => $request->cpf,
-            'status'            => 'Ok',
-            'password'          => bcrypt($request->senha),
-        ]);
+        $path = $request->file("foto")->store('imagens', 'public');
+
+        if($request->setorChefe == null){
+            DB::table('users')->insert([
+                'nome'              => $request->nome,
+                'matricula'         => $request->matricula,
+                'foto'              => $path,
+                'chefe'             => $request->rad,
+                'chefedoSetor'      => '',
+                'chefedaGuarnicao'  => '',
+                'setorAtuacao'      => $request->setor,
+                'patente'           => $request->patente,
+                'dataNascimento'    => $request->dataNascimento,
+                'sexo'              => $request->sexo,
+                'cidade'            => $request->cidade,
+                'estado'            => $request->estado,
+                'pelotao'           => $request->pelotao,
+                'rg'                => $request->rg,
+                'cpf'               => $request->cpf,
+                'status'            => 'Pendente',
+                'password'          => bcrypt($request->senha),
+            ]);
+        }else{
+            DB::table('users')->insert([
+                'nome'              => $request->nome,
+                'matricula'         => $request->matricula,
+                'foto'              => $path,
+                'chefe'             => $request->rad,
+                'chefedoSetor'      => $request->setorChefe,
+                'chefedaGuarnicao'  => $request->Chefeguarnicao,
+                'setorAtuacao'      => $request->setor,
+                'patente'           => $request->patente,
+                'dataNascimento'    => $request->dataNascimento,
+                'sexo'              => $request->sexo,
+                'cidade'            => $request->cidade,
+                'estado'            => $request->estado,
+                'pelotao'           => $request->pelotao,
+                'rg'                => $request->rg,
+                'cpf'               => $request->cpf,
+                'status'            => 'Pendente',
+                'password'          => bcrypt($request->senha),
+            ]);
+        }
         return redirect()->route('policial.index');
     }
 
@@ -104,28 +127,54 @@ class PolicialController extends Controller
     public function update(Request $request, User $policial)
     {
         $validacao = $this->Validator($request->all());
-        if($validacao->fails()){
+        if ($validacao->fails()) {
             return redirect()->back()
-            ->witherrors($validacao->errors())
-            ->withInput($request->all());
-        }else{
-            $policial->nome = $request->input("nome");
-            $policial->patente = $request->input('patente');
-            $path=$request->file("foto")->store('imagens', 'public');
-            $policial->foto = $path;
-            $policial->sexo = $request->input('sexo');
-            $policial->cidade = $request->input("cidade");
-            $policial->dataNascimento = $request->input('dataNascimento');
-            $policial->estado = $request->input("estado");
-            $policial->pelotao = $request->input("pelotao");
-            $policial->rg = $request->input("rg");
-            $policial->chefedeSetor = $request->input('rad');
-            $policial->setor = $request->input('setor');
-            $policial->cpf = $request->input("cpf");
-            $policial->password = bcrypt($request->input("senha"));
-            $policial->status = 'Ok';
-            $policial->save();
-            return redirect()->route('policial.index');
+                ->witherrors($validacao->errors())
+                ->withInput($request->all());
+        } else {
+            if ($request->setorChefe == null) {
+
+                $policial->nome = $request->input("nome");
+                $policial->patente = $request->input('patente');
+                $path = $request->file("foto")->store('imagens', 'public');
+                $policial->foto = $path;
+                $policial->sexo = $request->input('sexo');
+                $policial->cidade = $request->input("cidade");
+                $policial->dataNascimento = $request->input('dataNascimento');
+                $policial->estado = $request->input("estado");
+                $policial->pelotao = $request->input("pelotao");
+                $policial->rg = $request->input("rg");
+                $policial->chefe = $request->input('rad');
+                $policial->setorAtuacao = $request->input('setor');
+                $policial->chefedoSetor = '';
+                $policial->chefedaGuarnicao = '';
+                $policial->cpf = $request->input("cpf");
+                $policial->password = bcrypt($request->input("senha"));
+                $policial->status = 'Ok';
+                $policial->save();
+                return redirect()->route('policial.index');
+            } else {
+
+                $policial->nome = $request->input("nome");
+                $policial->patente = $request->input('patente');
+                $path = $request->file("foto")->store('imagens', 'public');
+                $policial->foto = $path;
+                $policial->sexo = $request->input('sexo');
+                $policial->cidade = $request->input("cidade");
+                $policial->dataNascimento = $request->input('dataNascimento');
+                $policial->estado = $request->input("estado");
+                $policial->pelotao = $request->input("pelotao");
+                $policial->rg = $request->input("rg");
+                $policial->chefe = $request->input('rad');
+                $policial->setorAtuacao = $request->input('setor');
+                $policial->chefedoSetor = $request->input('setorChefe');
+                $policial->chefedaGuarnicao = $request->input('Chefeguarnicao');
+                $policial->cpf = $request->input("cpf");
+                $policial->password = bcrypt($request->input("senha"));
+                $policial->status = 'Ok';
+                $policial->save();
+                return redirect()->route('policial.index');
+            }
         }
     }
 
@@ -141,24 +190,26 @@ class PolicialController extends Controller
         return redirect()->route('policial.index');
     }
 
-    public function list(){
+    public function list()
+    {
         $policial = User::all();
 
-       return response()->json($policial);
+        return response()->json($policial);
     }
 
-    public function confirmarRegistro($id){
+    public function confirmarRegistro($id)
+    {
         DB::table('users')->where('id', $id)->update([
             'status' => 'Ok'
         ]);
 
 
-        return redirect()->route('home');
+        return redirect()->route('policial.index');
     }
 
     public function Validator($data)
     {
-        $regras=[
+        $regras = [
             'nome'              => 'required',
             'matricula'         => 'required ',
             'foto'              => 'required',
@@ -172,12 +223,13 @@ class PolicialController extends Controller
             'cpf'               => 'required',
             'senha'             => 'required',
             'rad'               => 'required',
-            'senhaConfirma'     => 'required | same:senha',];
+            'senhaConfirma'     => 'required | same:senha',
+        ];
 
-        $mensagens=[
+        $mensagens = [
             'required'                   => 'Campo Obrigatório',
             'matricula.unique'           => 'Matrícula já existe',
-            'same'                       => 'Senhas não coincidem '      
+            'same'                       => 'Senhas não coincidem '
         ];
 
         return Validator::make($data, $regras, $mensagens);
