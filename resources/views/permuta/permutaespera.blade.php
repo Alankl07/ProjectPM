@@ -20,9 +20,9 @@
                 <p style="position: relative; right:9px">no dia {{ date('d/m/Y', strtotime($permuta->escaladoDia_do_servico))}}, das {{$permuta->escaladoHora_inicial}} às {{$permuta->escaladoHora_final}} , tendo em vista</p><p> {{$permuta->virtude}}</p>
                 <p><b>Declaro que a referida permuta está em conformidade com o preceituado no Art. 2º § 2º, Portaria N° 067 - CG/11.</b></p>
                 <p>Feira de Santana, ____/____/_____</p>
-                <p style="position: relative; right:200px">__________________________________<br>Solicitante <p style="position: relative; left:200px; top:-62px">__________________________________<br>Substituto</p></p>                    
+                <p style="position: relative; top:20px; text-align: center; justify-content: center;">__________________________________<br>Solicitante <p style="position: relative; text-align: center; justify-content: center; top:30px">__________________________________<br>Substituto</p></p>                    
                 @if($permuta->matricula != Auth::User()->matricula)
-                    <a style="position: relative; top: -50px" data-confirm='data-confirm' class="btn btn-success" href="{{route('aceitar', $permuta)}}">Aceitar</a>
+                    <a class="btnAceitarPermuta btn btn-success" data-confirm='data-confirm' href="{{route('aceitar', $permuta)}}">Aceitar</a>
                 @endif
 
                 

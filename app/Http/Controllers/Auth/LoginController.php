@@ -54,8 +54,13 @@ class LoginController extends Controller
 
         if(Auth::attempt($credenciais))
         {
+            if(Auth::user()->status == 'Ok'){
                 return redirect()->route('home');
-        
+            }else{
+                Auth::logout();
+                return redirect()->back()->with('msg',"Cadastro aguardando confirmação");
+            }
+
         }else{
             return redirect()->back()->with('msg',"Matrícula ou Senha incorreta");
         }

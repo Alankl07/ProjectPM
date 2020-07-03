@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 1000px)" href="{{asset('css/styles.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 1000px)" href="{{asset('css/medium.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 500px)" href="{{asset('css/small.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
 </head>
 
@@ -31,7 +33,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a id="dropdown" class="dropdown-item" href="{{route('suspeitos.create')}}">Cadastrar Suspeito</a>
-                        @if(Auth::user()->setorAtuacao == 'SPO')
+                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO' || Auth::user()->patente == 'Coronel')
                         <a id="dropdown" class="dropdown-item" href="{{route('policial.create')}}">Cadastrar Policial</a>
                         @endif
                     </div>
@@ -53,10 +55,10 @@
                     </a>
                     <div id="dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == '1º PELOTÃO' || Auth::user()->chefedoSetor == '2º PELOTÃO' || Auth::user()->chefedoSetor == '3º PELOTÃO' || Auth::user()->chefedoSetor == '4º PELOTÃO' || Auth::user()->chefedoSetor == '5º PELOTÃO' || Auth::user()->chefedoSetor == '6º PELOTÃO' || Auth::user()->chefedoSetor == '7º PELOTÃO' || Auth::user()->chefedoSetor == '8º PELOTÃO')
+                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefe == 'Sim' || Auth::user()->patente == 'Coronel')
                         <a id="dropdown" class="dropdown-item" href="{{route('index')}}">Permutas</a>
                         @endif
-                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO')
+                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO' || Auth::user()->patente == 'Coronel')
                         <a id="dropdown" class="dropdown-item" href="{{route('policial.index')}}">Policial</a>
                         @endif
                         <a id="dropdown" class="dropdown-item" href="{{route('suspeitos.index')}}">Suspeito</a>

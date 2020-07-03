@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 1000px)" href="{{asset('css/medium.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 500px)" href="{{asset('css/small.css')}}">
     <title>Cadastro</title>
 </head>
 
@@ -112,7 +114,7 @@
 
                 <p class="optchefe {{$errors->has('rad') ? 'has-error' : ''}} ">Chefe de Setor:
                     <input onclick="Radiosim()" type="radio" name="rad" value="Sim" id="sim">
-                    <label  for="nao">SIM</label>
+                    <label for="nao">SIM</label>
                     <input onclick="Radionao()" type="radio" name="rad" value="Não" id="nao">
                     <label for="nao">NÃO</label>
                     @if($errors->has('rad'))
@@ -122,17 +124,17 @@
                     @endif
                 </p>
 
-                <div id="SetorTela2"  class="setorTela2  {{ $errors->has('setor') ? 'has-error' : '' }}">
+                <div id="SetorTela2" class="setorTela2  {{ $errors->has('setor') ? 'has-error' : '' }}">
                     <label for="setorChefe">Setor:</label>
                     <select name="setorChefe" id="patente">
                         <option disabled selected>---SELECIONE SETOR---</option>
-                        <option name="setorChefe">COMANDANTE</option>
-                        <option name="setorChefe">SUBCOMANDANTE</option>
-                        <option name="setorChefe">ALMOXARIFADO</option>
+                    <option name="setorChefe">COMANDANTE</option>
+                    <option name="setorChefe">SUBCOMANDANTE</option>
                         <option name="setorChefe">SPO</option>
                         <option name="setorChefe">SSO</option>
                         <option name="setorChefe">CORSET</option>
                         <option name="setorChefe">SOINT</option>
+                        <option name="setorChefe">ALMOXARIFADO</option>
                         <option name="setorChefe">1º PELOTÃO</option>
                         <option name="setorChefe">2º PELOTÃO</option>
                         <option name="setorChefe">3º PELOTÃO</option>
@@ -149,7 +151,7 @@
                     @endif
                 </div>
 
-                <div id="Radioguarnicao"  class=" guarnicao col-sm-2">
+                <div id="Radioguarnicao" class=" guarnicao col-sm-2">
                     <label for="">Guarnição</label>
                     <input class="form-control" name="Chefeguarnicao" id="guarnicao" type="text">
                 </div>
@@ -241,7 +243,7 @@
         </div>
     </form>
 
-    
+
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
 </body>
 

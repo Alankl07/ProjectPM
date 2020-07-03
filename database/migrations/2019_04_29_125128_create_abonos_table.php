@@ -17,6 +17,7 @@ class CreateAbonosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('num_mat');
+            $table->string('setorAtuacao');
             $table->string('substituto');
             $table->string('mat_sub');
             $table->string('servico');

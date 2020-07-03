@@ -15,6 +15,7 @@ class PermutarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $permutas = Permutar::all();
@@ -96,10 +97,7 @@ class PermutarController extends Controller
         {
             return view('permuta/permutaespera', compact('permuta'));
         }
-        if($permuta->status == "Aceitar"){
-            return view('permuta/permutasubistituto', compact('permuta'));
-        }
-        if($permuta->status == "Aceita" || $permuta->status == "Confirmada" || $permuta->status == "Confirmada pelo SPO")
+        if($permuta->status == "Permuta aceita" || $permuta->status == "Confirmada" || $permuta->status == "Confirmada pelo CMD")
         {
             return view('permuta/permutaAceita', compact('permuta'));
         }
@@ -176,7 +174,7 @@ class PermutarController extends Controller
             $permuta->escaladoHora_inicial = $request->input('dassub');
             $permuta->escaladoHora_final = $request->input('assub');
             $permuta->virtude = $request->input('virtude');
-            $permuta->status = "Aceita";
+            $permuta->status = "Permuta aceita";
             $permuta->dataSPO = "";
             $permuta->assinaturaSPO = "";
             $permuta->optCMD = "";
@@ -194,10 +192,12 @@ class PermutarController extends Controller
 
     public function aceitar($id)
     {
-        DB::table('permutars')->where('id', $id)->update([
-            'status'    => 'Aceitar'
-        ]);
-        return redirect()->route('permutas.show', compact('id'));
+        $permutas = Permutar::all();
+        foreach($permutas as $permuta){
+            if($permuta->id == $id){
+            return view('permuta/permutasubistituto', compact('permuta'));
+            }
+        }
     } 
 
     public function atualizarStatus($id)
@@ -211,9 +211,10 @@ class PermutarController extends Controller
     public function SPO($id)
     {
         DB::table('permutars')->where('id', $id)->update([
-            'status'        => 'Confirmada pelo SPO',
-            'dataSpo'       => now(),
-            'assinaturaSPO' => Auth::user()->nome
+            'status'            => 'Confirmada e Finalizada',
+            'dataSpo'           => now(),
+            'dataConfirmacao'   => now(),
+            'assinaturaSPO'     => Auth::user()->nome
         ]);
         return redirect()->route('home');
     }
@@ -237,9 +238,8 @@ class PermutarController extends Controller
     public function CMD($id)
     {
         DB::table('permutars')->where('id', $id)->update([
-            'status'            => 'Confirmada e Finalizada',
+            'status'            => 'Confirmada',
             'optCMD'            => 'Deferimento',
-            'dataConfirmacao'   => now(),
             'assinaturaCMD'     => Auth::user()->nome
         ]);
 

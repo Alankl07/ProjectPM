@@ -1,6 +1,5 @@
 body{
-    overflow-x:hidden;
-    overflow-x:hidden ;
+    overflow-x:auto;
     overflow-y:auto ;
 }
 
@@ -79,7 +78,7 @@ div#dispensa{
 .escalado{
     width: 350px;
     margin-left: 20px;
-    margin-top: 5px;
+    margin-top: 5px
 }
 
 .dia{
@@ -94,7 +93,6 @@ div#dispensa{
     margin-left: 20px;
     margin-top: 5px;
 }
-
 
 .virtude{
     margin-right: 67%;
@@ -134,14 +132,6 @@ input:hora{
 #ass{
     width: 115px;
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-/* LISTA PERMUTA */
-.tituloPermuta{
-    position: relative;
-    font-size: 13pt;
-    top: -29px;
-    left: 40%;
 }
 
 /* .ass Tela dispensa  */ 
@@ -203,7 +193,8 @@ div#div_susp{
 }
 
 .nomesus{
-    margin-right: 50%;
+    
+    width: 320px;
     margin-left: 20px;
     margin-top: -15px;
 }
@@ -217,7 +208,7 @@ input#nomesus{
 .vulgosus{
     position: relative;
     margin-left: 20px;
-    width: 39%;
+    width: 320px;
     top: 5px;
 }
 
@@ -249,7 +240,7 @@ input#imp{
     position: relative;
     left: 20px;
     top:40px;
-    width: 200px;
+    width: 320px;
 }
 
 input#cpfsus{
@@ -259,7 +250,7 @@ input#cpfsus{
 .rgsus{
     position: relative;
     top: 70px;
-    width: 200px;
+    width: 320px;
     left: 20px;
 }
 
@@ -271,7 +262,7 @@ input#rgsus{
     position: relative;
     top: -7px;
     margin-left: 140px;
-    margin-right: 70%;
+    width: 200px;
 }
 
 input#cidadesus{
@@ -282,7 +273,8 @@ input#cidadesus{
     position: relative;
     top: 60px;
     margin-right: 94%;
-    margin-left: 20px;
+    width: 80px;
+    left: 20px;
 }
 
 input#estadosus{
@@ -293,7 +285,7 @@ input#estadosus{
     position: relative;
     top: 10px;
     margin-left: 20px;
-    margin-right: 70%;
+    width: 320px;
 }
 
 #enderecosus{
@@ -315,13 +307,13 @@ input#crimesus{
     position: relative;
     top: 110px;
     margin-left: 20px;
-    margin-right: 85%;
+    width: 150px;
 }
 
 .sexo{
     position: relative;
     top: 44px;
-    left: 350px;
+    left: 200px;
     width: 100px ;
 }
 
@@ -339,7 +331,7 @@ input#datanasc{
     position: relative;
     top: 30px;
     margin-left: 20px;
-    margin-right: 70%;
+    width: 320px;
 }
 
 input#localAtu{
@@ -350,7 +342,7 @@ input#localAtu{
     position: relative;
     top: 50px;
     margin-left: 20px;
-    margin-right: 70%;
+    width: 320px;
 }
 
 input#mae{
@@ -361,7 +353,7 @@ input#mae{
     position: relative;
     top: 40px;
     margin-left: 20px;
-    margin-right: 70%;
+    width: 320px;
 }
 
 input#pai{
@@ -370,10 +362,10 @@ input#pai{
 
 .btnsus{
     position: relative;
-    left: 83%;
-    margin: 20px;
-    top: 100%;
-    width: 10%;
+    left: 20px;
+    top: 100px;
+    width: 100px;
+    margin-bottom: 20px;
 }
 
 button#btnsus{
@@ -412,7 +404,7 @@ div#div_pol{
     flex: auto;
     position:  relative;
     top: -15px;
-    left: 400px;
+    left: 380px;
     width: 150px;
 }
 
@@ -420,14 +412,14 @@ div#div_pol{
     flex: auto;
     position:  relative;
     top: -107px;
-    left: 400px;
+    left: 300px;
     width: 150px;
 }
 
 .setorTela2{
     position:  absolute;
-    top: -60px;
-    left: 290px;
+    top: 10px;
+    left: 20px;
     width: 150px;
     display: none;
 }
@@ -462,14 +454,15 @@ option#graduacao{
 
 .guarnicao {
     position: absolute; 
-    top: -105px; 
-    left: 500px;
+    top: -20px; 
+    left: 250px;
     display: none;
 }
 
 input#guarnicao{
     background-color: rgba(0, 0, 0, 0.1);
     background-size: 50px;
+    width: 100px;
 }
 
 .nomepol{
@@ -488,7 +481,7 @@ input#nomepol{
     flex: auto;
     position: relative;
     top: -40px;
-    left: 19%;
+    left: 180px;
 }
 
 .mat{
@@ -501,6 +494,7 @@ input#nomepol{
 input#num_mat{
     background-color: rgba(0, 0, 0, 0.1);
     background-size: 50px;
+    width: 150px;
 }
 
 .fotopol{
@@ -542,7 +536,7 @@ input#rgpol{
     flex: auto;
     position: relative;
     top: -160px;
-    left: 11%;
+    left: 150px;
     width: 300px;
 }
 
@@ -563,7 +557,7 @@ input#cidadepol{
     position: relative;
     top: -110px;
     left: 20px;
-    width: 160px;
+    width: 150px;
 }
 
 #dataNascimento{
@@ -622,10 +616,9 @@ input#senhap{
 
 .btnpol{
     position: relative;
-    left: 83%;
-    margin-right: 100px;
-    top: -258px;
-    width: 10%;
+    left: 1px;
+    top: -180px;
+    width: 100px;
     height: 100px;
     margin-bottom: 0;
 }
@@ -637,19 +630,19 @@ div#permuta{
 
 .btnAceitarPermuta{
     position: relative; 
-    top: 80px
+    top: 100px
 }
 
 .btnOkPermuta{
     position: relative; 
     top: -50px; 
-    left:30%
+    left:20%
 }
 
 .btnRefazerPermuta{
     position: relative; 
     top: -50px; 
-    left:60%
+    left:65%
 }
 
 div#spo{
@@ -661,7 +654,6 @@ div#spo{
     padding: 10px;
     width: 180px;
     height: 110px;
-    left: 200px; 
 }
 
 .cmd{
@@ -669,7 +661,7 @@ div#spo{
     text-align: center;
     border: 1px solid black;
     top: -70px;  
-    left: 900px;  
+    left: 700px;  
     padding: 5px;
     padding-top: 5px;
     line-height: -320pt;
@@ -961,9 +953,21 @@ a#btnspoRefazer{
     margin-left: 5%;
 }
 
+
+.registroSf{
+    position: absolute;
+    margin-top: -168px;
+    margin-left: 30%;
+}
+
+.img-responsive {
+    width: 100px; 
+    height: 100px;
+}
+
 .btnSuspeitoRegis{
     position:relative; 
-    left: 35px; 
+    left: 25px; 
     width: 150px;
 }
 
@@ -980,13 +984,6 @@ a#btnspoRefazer{
     left: 100px;
 }
 
-
-.registroSf{
-    position: absolute;
-    margin-top: -190px;
-    margin-left: 35.2%;
-}
-
 .registroSn{
     position: relative;
     margin-top: 18%;
@@ -999,11 +996,6 @@ a#btnspoRefazer{
     margin-left: 20px;
     margin-right: 10%;
     text-align: center;
-}
-
-.img-responsive {
-    width: 100px; 
-    height: 100px;
 }
 
 
@@ -1152,13 +1144,18 @@ a#btnspoRefazer{
 
 .solicitante{
     position: relative;
-    left: 63%;
-    top: -595px;
+    top: 10px;
 }
+
 
 .titloPermut{
     position: relative;
     left: 20px;
+}
+
+.btnDivPer{
+    position: relative;
+    margin-bottom: 20px;
 }
 
 /*TELA CRIME*/

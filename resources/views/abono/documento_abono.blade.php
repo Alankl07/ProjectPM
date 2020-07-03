@@ -55,7 +55,7 @@
             @endif
         </div>
         <div class="text-center" style="position: relative; top: 30px">
-            <p style="margin: 0px auto">____________________________________________________________________________</p>
+            <p style="margin: 0px auto">_______________________________________________________</p>
             <p>Solicitante</p>
         </div>
         <div class="text-center" style="position: relative; top: 30px">
@@ -73,7 +73,7 @@
         </div>
         
         <div style="position: relative; margin: 50px">
-            @if(Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $abono->status == "Aguardando confirmação do CMD")
+            @if(Auth::user()->chefedoSetor == $abono->setorAtuacao && $abono->status == "Aguardando confirmação do CMD")
                 <a href="{{route('simAbonoCMD', $abono->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
                 <a href="{{route('naoAbonoCMD', $abono->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
                 <a href="{{route('refazerAbono', $abono->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Abono</a>

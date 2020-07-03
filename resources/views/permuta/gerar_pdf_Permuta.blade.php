@@ -89,7 +89,7 @@
         <p >com o, $permuta->escalado, Mat.:{$permuta->escaladoMatricula} que se encontra escalado no        {$permuta->escaladoLocal}</p>
         <p>no dia {$dia_do_servico}, das {$permuta->escaladoHora_inicial} às {$permuta->escaladoHora_final}, tendo em vista {$permuta->virtude}</p>
         <p><b>Declaro que a referida permuta está em conformidade com o preceituado no Art. 2º § 2º, Portaria N° 067 - CG/11.</b></p>
-        <p>Feira de Santana,{$dataConfirmacao}</p>
+        <p>Feira de Santana, {$dataConfirmacao}</p>
         <p style='position: relative; left:-250px; top: 10px'>{$permuta->nome}</p>
         <p style='position: relative; left: 280px; top: -25px'>{$permuta->escalado}</p>
         <p style='position: relative; left:-250px; top: -45px'>__________________________________</p>
@@ -112,18 +112,18 @@
             <link href='css/personalizado.css' rel='stylesheet'>
             <link rel='stylesheet' type='text/css' href='css/styles.css'>
         </head>
-    <div id='spo' style='left: 50px'>
-    <p id='via' style='position: relative; top: -60px' >VIA DA SPO</p>
-        <p style='position: relative; top: -40px'>AUTORIZO EM___/___/___</p>
-        <p style='position: relative; top: -10px'></p> 
-        <p style='position: relative; top: -50px'>_______________</p> <br >  <p style='position: relative; top: -90px'> Chefe da SPO</P>
-        
-    </div>
+        <div id='spo' style='left: 50px'>
+        <p id='via' style='position: relative; top: -60px' >VIA DA SPO</p>
+            <p style='position: relative; top: -60px'>AUTORIZO EM {$dataSPO}</p>
+            <p style='position: relative; top: -60px'> {$permuta->assinaturaSPO}</p> 
+            <p style='position: relative; top: -90px'>_______________</p> <br >  <p style='position: relative; top: -130px'> Chefe da SPO</P>
+            
+        </div>
     <div style='position:relative; top:-87px; left :750px' class='cmd'>
             <p>COMANDANTE DO PELOTÃO </p>
             <p style='position: relative; top: 40px'>OPINO POR: DEFERIMENTO (  )</p> 
-            <p style='position: relative; top: 60px'> INDEFERIMENTO ( X )</p> 
-            <p style='position: relative; top: 85px'>{$permuta->assinaturaCMD}</p>
+            <p style='position: relative; top: 60px'> INDEFERIMENTO (  )</p> 
+            <p style='position: relative; top: 85px'></p>
             <p style='position: relative; top: 96px'> _____________________</p>
             <p style='position: relative; top: 125px'>CMD PEL</p>
     </div>
@@ -135,7 +135,7 @@
         <p >com o, $permuta->escalado, Mat.:{$permuta->escaladoMatricula} que se encontra escalado no        {$permuta->escaladoLocal}</p>
         <p>no dia {$dia_do_servico}, das {$permuta->escaladoHora_inicial} às {$permuta->escaladoHora_final}, tendo em vista {$permuta->virtude}</p>
         <p><b>Declaro que a referida permuta está em conformidade com o preceituado no Art. 2º § 2º, Portaria N° 067 - CG/11.</b></p>
-        <p>Feira de Santana,{$dataConfirmacao}</p>
+        <p>Feira de Santana, {$dataConfirmacao}</p>
         <p style='position: relative; left:-250px; top: 10px'>{$permuta->nome}</p>
         <p style='position: relative; left: 280px; top: -25px'>{$permuta->escalado}</p>
         <p style='position: relative; left:-250px; top: -45px'>__________________________________</p>
@@ -158,7 +158,7 @@
     if($permuta->optCMD == 'Indeferimento'){
         $dompdf->load_html($pagina2);
     }
-    if($permuta->dataSPO == ''){
+    if($permuta->assinaturaCMD == ''){
         $dompdf->load_html($pagina3);
     }
 

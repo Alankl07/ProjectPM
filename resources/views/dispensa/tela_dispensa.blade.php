@@ -13,12 +13,12 @@
         <p style="margin: 0px auto"><b>SEÇÃO DE PLANEJAMENTO OPERACIONAL</b></p>
     </div>
     <div style="position: relative; top: -150px">
-        @if($dispensa->Status != 'Confirmada pelo SPO' && $dispensa->Status != 'Confirmada e Finalizada' )
+        @if($dispensa->Status != 'Confirmada e Finalizada' )
         <div id="spo">
-            <p id="via">VIA DA SPO</p>
+            <p id="via">VIA DA SPO</p>  
             <p id="spo">AUTORIZO EM___/___/___ _____________________ Chefe da SPO</P>
             <div style="display: none"><input type="text" id="idPermuta"></div>
-            @if(Auth::user()->setor == 'SPO' && Auth::user()->chefedeSetor && $dispensa->Status != 'Nâo Autorizada' )
+            @if(Auth::user()->chefedoSetor == 'SPO' && $dispensa->Status == "Confirmada" || Auth::user()->chefedoSetor == 'SPO' && $dispensa->Status == "Aguardando Confirmação" )
             <div class="butaoSPO">
                 <a href="{{route('spoDispensa', $dispensa->id)}}" class="btn btn-primary" id="btnspoSim" data-confirm='data-confirm'>OK</a>
                 <a href="{{route('naoDispensa', $dispensa->id)}}" data-confirm='data-confirm' class="btn btn-primary" id="btnspoNao">Não</a>
@@ -36,17 +36,17 @@
                 <p style="position: relative; top: -130px"> Chefe da SPO</P>
         </div>
         @endif
-        @if($dispensa->Status != 'Confirmada e Finalizada' && $dispensa->Status != 'Indeferimento')
+        @if($dispensa->assinaturaCMD == '')
         <div class="cmd">
             <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( ) INDEFERIMENTO ( ) _____________________<br>CMD PEL</p>
-            @if(Auth::user()->setor == 'PELOTÃO' && Auth::user()->chefedeSetor == 'Sim' && $dispensa->Status == 'Confirmada pelo SPO')
+            @if(Auth::user()->chefedoSetor == $dispensa->setorAtuacao && $dispensa->chefedoSetor != 'SPO')
             <a href="{{route('cmdDispensa', $dispensa->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
             <a href="{{route('naoCMDDispensa', $dispensa->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
             <a href="{{route('refazerDispensa', $dispensa->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Dispensa</a>
             @endif
         </div>
         @endif
-        @if($dispensa->Status == 'Confirmada e Finalizada' || $dispensa->Status == 'Indeferimento')
+        @if($dispensa->assinaturaCMD != '')
         <div class="cmd">
             @if($dispensa->optCMD == 'Deferimento')
                 <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( X ) INDEFERIMENTO ( )
@@ -73,9 +73,9 @@
     <p>{{$dispensa->virtude}}</p>
     <p>Feira de Santana, ____de________________de________.</p>
     <p style="margin: 0px auto">______________________________________</p>
-    <p style="margin: 0px auto">Solicitante</p>
+    <p style="margin: -10px auto">Solicitante</p>
     @if($dispensa->Status == 'Confirmada e Finalizada')
-    <a href="{{route('imprimirDispensa', $dispensa)}}" class="btn btn" style="position: relative; top: 40px; height: 40px; width: 150px; color: white; background-color: blue;">IMPRIMIR</a>
+    <a href="{{route('imprimirDispensa', $dispensa)}}" class=" btnButtonImprimir btn btn">IMPRIMIR</a>
     @endif
 </div>
 @endsection('body')

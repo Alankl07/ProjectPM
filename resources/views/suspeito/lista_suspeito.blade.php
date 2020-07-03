@@ -5,15 +5,13 @@
     <ul class="list-group">
         <li id="tabsus" id="litable" class="list-group-item active">
             <h4 class="h4nome">Nome</h4>
-            <h4 class="h4vulgo">Vulgo</h4>
-            <h4 class="h4qtd">Quantidade de Conduções</h4>
+            <h4 style="top: -20px" class="h4qtd">Conduções</h4>
         </li>
         @foreach($suspeito as $sus)
         @if($sus->status != "Ok" && Auth::user()->setorAtuacao == "SOINT" )
         <a href="{{route('suspeitos.show', $sus)}}">
             <li id="tabela2" class="list-group-item">
                 <h4 class="h4nome">{{$sus->nome}}</h4>
-                <h4 class="h4vulgo">{{$sus->vulgo}}</h4>
                 <h4 style="left:83%" class="h4qtd">{{$sus->quantidadeCrime}}</h4>
             </li>
 
@@ -26,8 +24,7 @@
         <a href="{{route('suspeitos.show', $sus)}}">
             <li id="tabela2" class="list-group-item">
                 <h4 class="h4nome">{{$sus->nome}}</h4>
-                <h4 class="h4vulgo">{{$sus->vulgo}}</h4>
-                <h4 style="left:83%" class="h4qtd">{{$sus->quantidadeCrime}}</h4>
+                <h4 style="left:80%; top: -20px" class="h4qtd">{{$sus->quantidadeCrime}}</h4>
             </li>
         </a>
         @endif

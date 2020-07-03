@@ -37,7 +37,7 @@
                     @endif
                 </div>    
                 <div class="mat_sub col-3 {{$errors->has('mat_sub') ? 'has-error' : ''}}">
-                    <label>Matri­cula:</label>
+                    <label style="width: 100px" >Matri­cula:</label>
                     <input class="form-control" name="mat_sub" value="{{old('mat_sub')}}" id="mat_sub">
                     @if($errors->has('mat_sub'))
                         <span class="help-block" style="color:red">
@@ -82,7 +82,7 @@
                     @endif
                 </div>
                 <div class="horario2 col-2 pl-3  pt-2 {{$errors->has('as') ? 'has-error' : ''}}">
-                    <label for="as">Até às:</label>
+                    <label style="width: 100px" for="as">Até às:</label>
                     <input class="form-control" type="time" name="as" value="{{old('horario')}}" id="as">
                     @if($errors->has('as'))
                         <span class="help-block" style="color: red">

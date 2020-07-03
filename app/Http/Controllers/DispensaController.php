@@ -50,6 +50,7 @@ class DispensaController extends Controller
             $dispensa->solicitante = Auth::User()->nome;
             $dispensa->matricula = Auth::User()->matricula;
             $dispensa->pelotao = Auth::User()->pelotao;
+            $dispensa->setorAtuacao = Auth::User()->setorAtuacao;
             $dispensa->escalado = $request->input("escalado");
             $dispensa->dia_do_servico = $request->input("dia");
             $dispensa->hora_inicial = $request->input("das");
@@ -105,6 +106,7 @@ class DispensaController extends Controller
             $dispensa->solicitante = Auth::User()->nome;
             $dispensa->matricula = Auth::User()->matricula;
             $dispensa->pelotao = Auth::User()->pelotao;
+            $dispensa->setorAtuacao = Auth::User()->setorAtuacao;
             $dispensa->escalado = $request->input("escalado");
             $dispensa->dia_do_servico = $request->input("dia");
             $dispensa->hora_inicial = $request->input("das");
@@ -164,8 +166,9 @@ class DispensaController extends Controller
     public function SPO($id)
     {
         DB::table('dispensas')->where('id', $id)->update([
-            'status'        => 'Confirmada pelo SPO',
+            'status'        => 'Confirmada e Finalizada',
             'dataSpo'       => now(),
+            'dataConfirmacaoCMD'   => now(),
             'assinaturaSPO' => Auth::user()->nome
         ]);
         return redirect()->route('home');
@@ -190,9 +193,8 @@ class DispensaController extends Controller
     public function CMD($id)
     {
         DB::table('dispensas')->where('id', $id)->update([
-            'Status'    => 'Confirmada e Finalizada',
+            'Status'    => 'Confirmada',
             'optCMD'       => 'Deferimento',
-            'dataConfirmacaoCMD'   => now(),
             'assinaturaCMD' => Auth::user()->nome
         ]);
 

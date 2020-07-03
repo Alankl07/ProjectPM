@@ -33,9 +33,17 @@ class AbonoController extends Controller
     }
     public function store(Request $request)
     {
+        $validacao = $this->validator($request->all());
+
+        if($validacao->fails()){
+            return redirect()->back()
+            ->withErrors($validacao->errors())
+            ->withInput($request->all());
+        }
         $abonos = new Abono();
         $abonos->num_mat = $request->input("mat");
         $abonos->nome = $request->input("nome");
+        $abonos->setorAtuacao = auth::user()->setorAtuacao;
         $abonos->substituto = $request->input("substituto");
         $abonos->mat_sub = $request->input("mat_sub");
         $abonos->servico = $request->input("servico");
@@ -96,10 +104,18 @@ class AbonoController extends Controller
      */
     public function update(Request $request, Abono $abono)
     {
+        $validacao = $this->validator($request->all());
+
+        if($validacao->fails()){
+            return redirect()->back()
+            ->withErrors($validacao->errors())
+            ->withInput($request->all());
+        }
 
         DB::table('abonos')->where('id', $abono->id)->update([
             'num_mat'               => $request->input("mat"),
             'nome'                  => $request->input("nome"),
+            'setorAtuacao'          => Auth::user()->setorAtuacao,
             'substituto'            => $request->input("substituto"),
             'mat_sub'               => $request->input("mat_sub"),
             'servico'               => $request->input("servico"),
@@ -129,13 +145,14 @@ class AbonoController extends Controller
     public function Validator($date)
     {
         $regras = [
-            'mat'           => 'required',
+            'mat'               => 'required',
             'nome'              => 'required',
             'mat_sub'           => 'required',
             'substituto'        => 'required',
             'servico'           => 'required',
             'funcao'            => 'required',
             'horario'           => 'required',
+            'data'              => 'required',
             'as'                => 'required',
         ];
 
@@ -173,9 +190,9 @@ class AbonoController extends Controller
     public function CMD($id)
     {
         DB::table('abonos')->where('id', $id)->update([
-            'status'            => 'Confirmado e Finalizado',
-            'dataConfirmacaoCMD'   =>  now(),
-            'assinaturaCMD'     => Auth::user()->nome
+            'status'                => 'Confirmado e Finalizado',
+            'dataConfirmacaoCMD'    =>  now(),
+            'assinaturaCMD'         => Auth::user()->nome
         ]);
 
         return redirect()->route('home');

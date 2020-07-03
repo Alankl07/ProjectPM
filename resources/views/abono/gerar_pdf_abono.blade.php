@@ -17,33 +17,34 @@
 	<head>
 		<meta charset='utf-8'>
 		<title>Abono</title>
-		<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+		<link href='css/personalizado.css' rel='stylesheet'>
+		<link rel='stylesheet' type='text/css' href='css/styles.css'>
 	</head>
 	<body>
 	<div class='text-center'>
 		<div style='position: relative; top: 20px; ' >
-			<div class=''>
+			<div style='position: relative; left: 30%;'>
 				<p style='position: relative; top: -30px; margin: 0px auto'><b>POLÍCIA MILITAR DA BAHIA</b></p>
 				<p style='position: relative; top: -10px; margin: 0px auto'><b>COMANDO DE OPERAÇÕES POLICIAIS MILITARES</b></p>
 				<p style='position: relative; top: 10px; margin: 0px auto'><b>COMANDO DE POLICIAMENTO REGIONAL LESTE</b></p>
 				<p style='position: relative; top: 30px;'><b>65º COMPANHIA INDEPENDENTE DE POLÍCIA MILITAR</b></p>
 			</div>
 			<div>
-				<p style='position: relative; top: 20px;'><b>FORMULÁRIO DE ABONO DE SERVIÇO.</b></p>
+				<p style='position: relative; top: 20px; left: 35%'><b>FORMULÁRIO DE ABONO DE SERVIÇO.</b></p>
 			</div>
-			<div>
+			<div style='position: relative; left: 20%; top: 40px'>
 				<p style='position: relative; top: 10px; margin: 0px auto; '>Eu, $abono->nome, MAT: $abono->num_mat</p>
 				<p style='position: relative; top: 28px; margin: 0px auto'>solicito a V.S.ª autorização para abonar o serviço, no qual estou escalado conforme</p>
-				<p style='position: relative; top: 45px; left: -225px; margin: 0px auto'>informações abaixo:</p>
+				<p style='position: relative; top: 45px; margin: 0px auto'>informações abaixo:</p>
 				<p style='position: relative; top: 70px;'>SUBSTITUTO: $abono->substituto, Matricula: $abono->mat_sub</p>
 			</div>
-			<div style='position: relative; align-items: center; top: 70px'>
+			<div style='position: relative; top: 70px; left: 20%'>
 			<table class='table table-bordered'>
 			<thead>
 			  <tr>
-				<th scope='col'>SERVIÇO</th>
+				<th scope='col-1'>SERVIÇO</th>
 				<td scope='col'>$abono->servico</td>
-				<th scope='col'>FUNÇÃO</th>
+				<th scope='col-2'>FUNÇÃO</th>
 				<td scope='col'>$abono->funcao</td>
 			  </tr>
 			</thead>
@@ -61,26 +62,26 @@
 			</tbody>
 		  </table>
 			</div>
-			<div class='text-center'>
+			<div style='position: relative; left: 20%'>
 				<p style='position: relative; top: 70px; margin: 0px auto'>Após assinarmos, estamos cientes que a o Comandante não é responsável por</p>
 				<p style='position: relative; top: 88px; margin: 0px auto'>gerenciar qualquer situação em que haja conflito ou divergência daquilo que foi acordado</p>
-				<p style='position: relative; top: 105px; left: -260px; margin: 0px auto'>entre as partes.</p>
+				<p style='position: relative; top: 105px; margin: 0px auto'>entre as partes.</p>
 			</div>
 	
-			<div style='position: relative; top: 150px;' class='text-center'>
+			<div style='position: relative; top: 120px; left: 40%'>
 				<p style='display: none'></p>
 				<p>Em  $dia de $mes de $ano </p>
 			</div>
-			<div class='text-center' style='position: relative; top: 100px'>
-				<p style='position: relative; top: 60px; margin: 0px auto'>____________________________________________________________________________</p>
-				<p style='position: relative; top: 80px; margin: 0px auto'>Solicitante</p>
+			<div style='position: relative; top: 30px; left: 20%'>
+				<p style='position: relative; top: 100px; margin: 0px auto'>____________________________________________________________________________</p>
+				<p style='position: relative; left:25%; top: 120px; margin: 0px auto'>Solicitante</p>
 			</div>
-			<div class='text-center' style='position: relative; top: 80px'>
-				<p style='position: relative; top: 120px; margin: 20px auto'>AUTORIZADO</p>
-				<p style='position: relative; top: 160px'>EM $dataConfirmacaoCMD </p>
-					<p style='position: relative; top: 175px; margin: -10px auto'><b>$abono->assinaturaCMD</b></p>
-				<p style='position: relative; top: 180px; margin: 0px auto'>________________________________</p>
-				<p  style='position: relative; top: 200px;'>CMT DO PELOTÃO</p>
+			<div style='position: relative; top: 60px; left: 43%'>
+				<p style='position: relative; top: 110px; margin: 20px auto'>AUTORIZADO</p>
+				<p style='position: relative; top: 140px'>EM $dataConfirmacaoCMD </p>
+					<p style='position: relative; top: 150px; margin: -10px auto; left: -20px'><b>$abono->assinaturaCMD</b></p>
+				<p style='position: relative; top: 160px; left: -70px; margin: 0px auto'>________________________________</p>
+				<p  style='position: relative; top: 180px; left: -20px;'>CMT DO PELOTÃO</p>
 			</div>
 		</div>
 	</div>
@@ -111,4 +112,3 @@
 			"Attachment" => false //Para realizar o download somente alterar para true
 		)
 	)
-?>

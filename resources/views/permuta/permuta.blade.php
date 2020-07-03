@@ -30,6 +30,11 @@
                 <p style="position: relative; top: -45px"> _____________________</p>
                 <p style="position: relative; top: -65px">CMD PEL</p>
                 @endif
+                @if($permuta->optCMD == '')
+                <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( ) INDEFERIMENTO (  )
+                <p style="position: relative; top: -10px"> _____________________</p>
+                <p style="position: relative; top: -30px">CMD PEL</p>
+                @endif
     </div>
     <p style="position: relative; text-align:center; top:-150px">POLÍCIA MILITAR DA BAHIA <br> COMANDO DE POLICIAMENTO REGIONAL LESTE <br> 65ª CIPM - FEIRA DE SANTANA</p>
     <div style="position: relative; top:-120px; text-align: justify-center">

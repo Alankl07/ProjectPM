@@ -4,7 +4,7 @@
     <div class="registropolicial">
         <div class="registropolicia">
             <p style="font-weight: bold;" class="registron">NOME:<br><p class="registronome">{{$policial->nome}}</p></p>
-            <p style="font-weight: bold;" class="registrof"><br> <img style="width: 100px; height: 100px;" src="/storage/{{$policial->foto}}"/></p>
+            <p style="font-weight: bold;" class="registrof"><br> <a href="/storage/{{$policial->foto}}"><img style="width: 100px; height: 100px;" src="/storage/{{$policial->foto}}"/></a></p>
             <p style="font-weight: bold;" class="registrom">  DATA DE NASCIMENTO:<br><p class="registromatricula">{{ date('d/m/Y', strtotime($policial->dataNascimento))}}</p></p>
             <p style="font-weight: bold;" class="registropa">PATENTE:<br><p class="registropatente">{{$policial->patente}}</p></p>
             <p style="font-weight: bold;" class="registrom">MATRÍCULA:<br><p class="registromatricula">{{$policial->matricula}}</p></p>
@@ -13,6 +13,8 @@
             <P style="font-weight: bold;" class="registror">RG:<br><p class="registrorg">{{$policial->rg}}</p></P>
             <p style="font-weight: bold;" class="registroe">ESTADO:<br><p class="registroestado">{{$policial->estado}}</p></p>
             <P style="font-weight: bold;" class="registroc">CIDADE:<br><p class="registrocidade">{{$policial->cidade}}</p></P>
+            <P style="font-weight: bold;" class="registrocp">SETOR DE ATUAÇÃO:<br><p class="registrocpf">{{$policial->setorAtuacao}}</p></P>
+            <P style="font-weight: bold;" class="registror">CHEFE DO SETOR:<br><p class="registrorg">{{$policial->chefedoSetor}}</p></P>
             <P style="font-weight: bold;" class="registrou">UNIDADE:<br><p class="registrounidade">{{$policial->pelotao}}</p></P>
     
         </div>

@@ -33,7 +33,7 @@
                     </span>
                 @endif 
             </div>
-            <div class="as {{$errors->has('as') ? 'has-error' : '' }}">
+            <div class="asDispensa {{$errors->has('as') ? 'has-error' : '' }}">
                 <label for="hora">Às:</label>
                 <input type="time" class="form-control" name="as" value="{{old('as')}}" id="hora"  size=30>
                 @if($errors->has('as'))

@@ -141,6 +141,8 @@
                 </span>
                 @endif
             </div>
+
+            <input type="text" hidden name="qtdCrime" value={{$suspeito->quantidadeCrime}}>
         </div>
 
         <div class="btnsus">

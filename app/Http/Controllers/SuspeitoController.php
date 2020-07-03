@@ -165,7 +165,7 @@ class SuspeitoController extends Controller
                 $suspeito->estado = $request->input('estado');
                 $suspeito->cidade = $request->input('cidadesus');
                 $suspeito->endereco = $request->input('enderecosus');
-                $suspeito->quantidadeCrime = '';
+                $suspeito->quantidadeCrime =$request->input(('qtdCrime'));
                 $suspeito->localAtuacao = $request->input('localAtuacao');
                 $suspeito->dataNascimento = $request->input('dataNascimento');
                 $path = $request->file("foto")->store('imagens', 'public');
@@ -185,7 +185,7 @@ class SuspeitoController extends Controller
                 $suspeito->estado = $request->input('estado');
                 $suspeito->cidade = $request->input('cidadesus');
                 $suspeito->endereco = $request->input('enderecosus');
-                $suspeito->quantidadeCrime = '';
+                $suspeito->quantidadeCrime =$request->input(('qtdCrime'));
                 $suspeito->localAtuacao = $request->input('localAtuacao');
                 $suspeito->dataNascimento = $request->input('dataNascimento');
                 $path = $request->file("foto")->store('imagens', 'public');
@@ -207,7 +207,7 @@ class SuspeitoController extends Controller
             'quantidadeCrime'    =>  1,
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('suspeitos.index');
     }
 
     /**

@@ -6,20 +6,26 @@ use App\User;
 use App\Patente;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Util\Json;
 
 class PolicialController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $policial = User::all();
-        return view('policial/lista_policiais', compact('policial'));
+    {   
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+            $policial = User::all();
+            return view('policial/lista_policiais', compact('policial'));
+        }else{
+            return view('erro');
+        }
     }
 
     /**
@@ -29,8 +35,12 @@ class PolicialController extends Controller
      */
     public function create()
     {
-        $patente = new Patente();
-        return view('policial/policial_cadastrar', compact('patente'));
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+            $patente = new Patente();
+            return view('policial/policial_cadastrar', compact('patente'));
+        }else{
+            return view('erro');
+        }
     }
 
     /**
@@ -51,7 +61,6 @@ class PolicialController extends Controller
 
         $path = $request->file("foto")->store('imagens', 'public');
 
-        if($request->setorChefe == null){
             DB::table('users')->insert([
                 'nome'              => $request->nome,
                 'matricula'         => $request->matricula,
@@ -68,31 +77,11 @@ class PolicialController extends Controller
                 'pelotao'           => $request->pelotao,
                 'rg'                => $request->rg,
                 'cpf'               => $request->cpf,
-                'status'            => 'Pendente',
+                'status'            => 'Ok',
                 'password'          => bcrypt($request->senha),
             ]);
-        }else{
-            DB::table('users')->insert([
-                'nome'              => $request->nome,
-                'matricula'         => $request->matricula,
-                'foto'              => $path,
-                'chefe'             => $request->rad,
-                'chefedoSetor'      => $request->setorChefe,
-                'chefedaGuarnicao'  => $request->Chefeguarnicao,
-                'setorAtuacao'      => $request->setor,
-                'patente'           => $request->patente,
-                'dataNascimento'    => $request->dataNascimento,
-                'sexo'              => $request->sexo,
-                'cidade'            => $request->cidade,
-                'estado'            => $request->estado,
-                'pelotao'           => $request->pelotao,
-                'rg'                => $request->rg,
-                'cpf'               => $request->cpf,
-                'status'            => 'Pendente',
-                'password'          => bcrypt($request->senha),
-            ]);
-        }
-        return redirect()->route('policial.index');
+        
+        return redirect()->route('home');
     }
 
     /**
@@ -103,7 +92,11 @@ class PolicialController extends Controller
      */
     public function show(User $policial)
     {
-        return view('policial/registroPolicial', compact('policial'));
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+            return view('policial/registroPolicial', compact('policial'));
+        }else{
+            return view('erro');
+        }
     }
 
     /**
@@ -114,7 +107,11 @@ class PolicialController extends Controller
      */
     public function edit(User $policial)
     {
-        return view('policial/policialeditar', compact('policial'));
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major" || Auth::user()->matricula == $policial->matricula){
+            return view('policial/policialeditar', compact('policial'));
+        }else{
+            return view('erro');
+        }
     }
 
     /**
@@ -152,7 +149,7 @@ class PolicialController extends Controller
                 $policial->password = bcrypt($request->input("senha"));
                 $policial->status = 'Ok';
                 $policial->save();
-                return redirect()->route('policial.index');
+                return redirect()->route('home');
             } else {
 
                 $policial->nome = $request->input("nome");
@@ -173,7 +170,7 @@ class PolicialController extends Controller
                 $policial->password = bcrypt($request->input("senha"));
                 $policial->status = 'Ok';
                 $policial->save();
-                return redirect()->route('policial.index');
+                return redirect()->route('home');
             }
         }
     }
@@ -187,7 +184,7 @@ class PolicialController extends Controller
     public function destroy(User $policial)
     {
         $policial->delete();
-        return redirect()->route('policial.index');
+        return redirect()->route('home');
     }
 
     public function list()

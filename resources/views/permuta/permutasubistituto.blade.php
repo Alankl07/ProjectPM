@@ -7,7 +7,7 @@
         <div>
             <div>
             <h1 id="titu">Solicitação de permuta</h1>
-            <h2>Dados do Solicitante</h2>
+            <h2 class="titloPermut">Dados do Solicitante</h2>
             
                 <div class="escalado {{$errors->has('nome') ? 'has-error' : ''}} ">
                     <label for="escalado">Eu:</label>
@@ -75,6 +75,7 @@
                     @endif
                 </div>
             <div class="solicitante {{$errors->has('nomesub') ? 'has-error' : ''}} ">
+            <h2 class="titloPermut" >Seus Dados</h2>
                 <div class="escalado">
                     <label for="escalado">Eu: </label>
                     <input id="imp" type="text" class="form-control" value=" {{ Auth::User()->nome }} " name="nomesub" id="nome" size=30>
@@ -132,7 +133,9 @@
                         </span>
                     @endif
                 </div>
-                <a onclick="confirma()" id="btndispensa" class="btn btn-primary">OK</a>
+                <div class="btnDivPer">
+                    <a onclick="confirma()" id="btndispensa"  class="btn btn-primary">OK</a>
+                </div>
             </div>
         </div>
         <div id="popupcx">

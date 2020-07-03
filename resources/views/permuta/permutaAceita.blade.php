@@ -6,7 +6,7 @@
     <p id="via">VIA DA SPO</p>
     <p id="spo">AUTORIZO EM___/___/___ _____________________ Chefe da SPO</P>
     <div style="display: none"><input type="text" id="idPermuta" value="{{$permuta->id}}"></div>
-    @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO' && Auth::user()->chefe == 'Sim' && $permuta->status == 'Confirmada')
+    @if(Auth::user()->setorAtuacao == 'SPO' && $permuta->status == 'Confirmada' || Auth::user()->chefedoSetor == 'SPO'  && $permuta->status == 'Confirmada')
     <div class="butaoSPO">
         <a href="{{route('spo', $permuta->id)}}" class="btn btn-primary" id="btnspoSim" data-confirm='data-confirm'>OK</a>
         <a href="{{route('nao', $permuta->id)}}" data-confirm='data-confirm' class="btn btn-primary" id="btnspoNao">Não</a>
@@ -17,7 +17,7 @@
 </div>
 <div class="cmd">
     <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( ) INDEFERIMENTO ( ) _____________________<br>CMD PEL</p>
-    @if(Auth::user()->chefedoSetor == $permuta->setorAtuacao && Auth::user()->chefe == 'Sim' && $permuta->status == "Confirmada" || Auth::user()->chefedoSetor == $permuta->setorAtuacao && Auth::user()->chefe == 'Sim' && $permuta->status == "Confirmada pelo SPO")
+    @if(Auth::user()->chefedoSetor == $permuta->setorAtuacao  && $permuta->status == "Confirmada" && $permuta->assinaturaCMD == '')
         <a href="{{route('cmd', $permuta->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
         <a href="{{route('naoCMD', $permuta->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
         <a href="{{route('refazer', $permuta->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Permuta</a>
@@ -34,12 +34,13 @@
         <p> {{$permuta->virtude}}</p>
         <p><b>Declaro que a referida permuta está em conformidade com o preceituado no Art. 2º § 2º, Portaria N° 067 - CG/11.</b></p>
         <p>Feira de Santana, ____/____/_____</p>
-        <p style="position: relative; right:200px">__________________________________<br>Solicitante <p style="position: relative; left:200px; top:-62px">__________________________________<br>Substituto</p>
+        <p style="position: relative; top:20px; text-align: center; justify-content: center;"">__________________________________<br>Solicitante <p style="position: relative; text-align: center; justify-content: center; top:30px">__________________________________<br>Substituto</p>
         </p>
     </div>
 </div>
-@if($permuta->matricula == Auth::User()->matricula && $permuta->status == 'Aceita')
-<a style="position: relative; top: -50px; left:50%" class="btn btn-success" data-confirm='data-confirm' onclick="confirmarPermuta()" href="{{route('atualizarStatus', $permuta->id)}}" >OK</a>
+@if($permuta->matricula == Auth::User()->matricula && $permuta->status == 'Permuta aceita')
+<a class=" btnOkPermuta btn btn-success" data-confirm='data-confirm' onclick="confirmarPermuta()" href="{{route('atualizarStatus', $permuta->id)}}" >OK</a>
+<a class=" btnRefazerPermuta btn btn-danger" data-confirm='data-confirm' onclick="confirmarPermuta()" href="{{route('refazer', $permuta->id)}}" >Refazer</a>
 @endif
 
 @endsection('body')

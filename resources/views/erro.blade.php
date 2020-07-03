@@ -1,7 +1,5 @@
 @extends('inicial')
 
 @section('body')
-    <script>
-        alert('Tela indidsponivel no momento.')
-    </script>
+    <h1 style=" position: relative; top: 200px; align-items: center; align-items: center;" >Você não tem autorização para acessar essa rota.</h1>
 @endsection(body)
