@@ -39,7 +39,7 @@
         @if($dispensa->assinaturaCMD == '')
         <div class="cmd">
             <p>COMANDANTE DO PELOTÃO <br> OPINO POR: DEFERIMENTO ( ) INDEFERIMENTO ( ) _____________________<br>CMD PEL</p>
-            @if(Auth::user()->chefedoSetor == $dispensa->setorAtuacao && $dispensa->chefedoSetor != 'SPO')
+            @if(Auth::user()->chefedoSetor == $dispensa->setorAtuacao && $dispensa->Status != 'Confirmada e Finalizada')
             <a href="{{route('cmdDispensa', $dispensa->id)}}" type="button" class="btn btn-primary" id="btncmdSim" data-confirm='data-confirm'>OK</a>
             <a href="{{route('naoCMDDispensa', $dispensa->id)}}" class="btn btn-primary" id="btncmdNao" data-confirm='data-confirm'>Não</a>
             <a href="{{route('refazerDispensa', $dispensa->id)}}" class="btn btn-primary" id="btncmdRefazer" data-confirm='data-confirm'>Refazer Dispensa</a>

@@ -22,7 +22,17 @@
             @csrf
             
             @method('DELETE')
-            <button style=" position: relative; left: 58%; width:100px; margin:20px; " type="submit" class = "btn btn-danger">Excluir</button>
+            <a onclick="confirma()"  style=" position: relative; left: 58%; width:100px; margin:20px; " class = "btn btn-danger">Excluir</a>
+            
+            <div id="popupcx">
+                <div id="popupimg" >
+                    <img src="/imgs/PMBA.png" width="50" height="50" alt="">
+                </div>
+                <p id="popuptxt">Deseja realmente prosseguir com a ação ?</p>
+                <p>
+                <input type="submit" id="popupbtnsim"  value="SIM" class="btn btn-success" ><input type="button" onclick="nao()"  id="popupbtnnao" value="NÃO" class="btn btn-danger">
+                </p>
+            </div>
         </form>    
     </div>
 @endsection('body')

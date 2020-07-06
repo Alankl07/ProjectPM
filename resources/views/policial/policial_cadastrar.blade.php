@@ -76,8 +76,6 @@
             <label for="setor">Setor:</label>
             <select name="setor" id="patente">
                 <option disabled selected>---SELECIONE SETOR---</option>
-                <option name="setor">COMANDANTE</option>
-                <option name="setor">SUBCOMANDANTE</option>
                 <option name="setor">ALMOXARIFADO</option>
                 <option name="setor">SPO</option>
                 <option name="setor">SSO</option>
@@ -117,8 +115,6 @@
                 <label for="setorChefe">Setor:</label>
                 <select name="setorChefe" id="patente">
                     <option disabled selected>---SELECIONE SETOR---</option>
-                <option name="setorChefe">COMANDANTE</option>
-                <option name="setorChefe">SUBCOMANDANTE</option>
                     <option name="setorChefe">SPO</option>
                     <option name="setorChefe">SSO</option>
                     <option name="setorChefe">CORSET</option>

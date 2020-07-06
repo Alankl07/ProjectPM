@@ -25,7 +25,16 @@
             <a class="btnSuspeitoRegis btn btn-success" href="{{route('registrar', $suspeito)}}">Registrar Crime</a>
             <a class="btnSuspeitoVisua btn btn-success"  href="{{route('crimes', $suspeito)}}">Visualizar Crimes</a>
             @method('DELETE')
-            <button class="btnSuspeitoExclu btn btn-danger" type="submit">Excluir Registro</button>
+            <a onclick="confirma()" class="btnSuspeitoExclu btn btn-danger" >Excluir Registro</a>
+            <div id="popupcx">
+                <div id="popupimg" >
+                    <img src="/imgs/PMBA.png" width="50" height="50" alt="">
+                </div>
+                <p id="popuptxt">Deseja realmente prosseguir com a ação ?</p>
+                <p>
+                <input type="submit" id="popupbtnsim"  value="SIM" class="btn btn-success" ><input type="button" onclick="nao()"  id="popupbtnnao" value="NÃO" class="btn btn-danger">
+                </p>
+            </div>
         </form> 
     </div>
 @endsection('body')
