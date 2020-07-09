@@ -57,15 +57,14 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $validacao = $this->Validator($request->all());
-        if($validacao->fails())
-        {
+        if ($validacao->fails()) {
             return redirect()->back()
-            ->withErrors($validacao->errors())
-            ->withInput($request->all());
+                ->withErrors($validacao->errors())
+                ->withInput($request->all());
         }
 
-        
-        $path=$request->file("foto")->store('imagens', 'public');
+
+        $path = $request->file("foto")->store('imagens', 'public');
 
         DB::table('users')->insert([
             'nome'              => $request->nome,
@@ -85,24 +84,24 @@ class RegisterController extends Controller
             'cpf'               => $request->cpf,
             'password'          => bcrypt($request->senha),
         ]);
+
+
         return redirect()->route('home');
-        
     }
 
     protected function registrar(Request $request)
     {
         $validacao = $this->Validator($request->all());
-        if($validacao->fails())
-        {
+        if ($validacao->fails()) {
             return redirect()->back()
-            ->withErrors($validacao->errors())
-            ->withInput($request->all());
+                ->withErrors($validacao->errors())
+                ->withInput($request->all());
         }
 
-        
-        $path=$request->file("foto")->store('imagens', 'public');
-        
-        if($request->setorChefe == null){
+
+        $path = $request->file("foto")->store('imagens', 'public');
+
+        if ($request->setorChefe == null) {
             DB::table('users')->insert([
                 'nome'              => $request->nome,
                 'matricula'         => $request->matricula,
@@ -122,7 +121,7 @@ class RegisterController extends Controller
                 'status'            => 'Pendente',
                 'password'          => bcrypt($request->senha),
             ]);
-        }else{
+        } else {
             DB::table('users')->insert([
                 'nome'              => $request->nome,
                 'matricula'         => $request->matricula,
@@ -143,24 +142,33 @@ class RegisterController extends Controller
                 'password'          => bcrypt($request->senha),
             ]);
         }
+
+        DB::table('logs')->insert([
+            'matricula'     =>  $request->matricula,
+            'acao'          =>  'Policial solicitou cadastro',
+            'data'          =>  now(),
+        ]);
+        
         return redirect()->route('/');
     }
 
     public function Validator($data)
     {
-        $regras=['nome'     => 'required',
-        'matricula'         => 'required',
-        'foto'              => 'required',
-        'patente'           => 'required',
-        'dataNascimento'    => 'required',
-        'sexo'              => 'required',
-        'cidade'            => 'required',
-        'estado'            => 'required',
-        'pelotao'           => 'required',
-        'rg'                => 'required',
-        'cpf'               => 'required',
-        'senha'             => 'required',
-        'senhaConfirma'     => 'required | same:senha',];
+        $regras = [
+            'nome'     => 'required',
+            'matricula'         => 'required',
+            'foto'              => 'required',
+            'patente'           => 'required',
+            'dataNascimento'    => 'required',
+            'sexo'              => 'required',
+            'cidade'            => 'required',
+            'estado'            => 'required',
+            'pelotao'           => 'required',
+            'rg'                => 'required',
+            'cpf'               => 'required',
+            'senha'             => 'required',
+            'senhaConfirma'     => 'required | same:senha',
+        ];
 
         return Validator::make($data, $regras);
     }

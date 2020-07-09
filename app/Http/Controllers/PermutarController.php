@@ -80,6 +80,14 @@ class PermutarController extends Controller
             $permutas->assinaturaCMD = "";
             $permutas->dataConfirmacao ="";
             $permutas->save();
+
+            DB::table('logs')->insert([
+                'matricula'     =>  Auth::User()->matricula,
+                'acao'          =>  'Solicitou permuta',
+                'id_acao'       =>  $permutas->id,
+                'data'          =>  now(),
+            ]);
+
             return redirect()->route('permutas.index');
         }
         
@@ -140,6 +148,13 @@ class PermutarController extends Controller
                     'status'            => 'Espera',
                 ]);
 
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Refez permuta',
+                    'id_acao'       =>  $permuta->id,
+                    'data'          =>  now(),
+                ]);
+
                 return redirect()->route('home');
             }
         }
@@ -181,6 +196,14 @@ class PermutarController extends Controller
             $permuta->assinaturaCMD = "";
             $permuta->dataConfirmacao ="";
             $permuta->save();
+
+            DB::table('logs')->insert([
+                'matricula'     =>  Auth::User()->matricula,
+                'acao'          =>  'Aceitou permuta',
+                'id_acao'       =>  $permuta->id,
+                'data'          =>  now(),
+            ]);
+
             return redirect()->route('permutas.index');
         }
     }
@@ -205,6 +228,14 @@ class PermutarController extends Controller
         DB::table('permutars')->where('id', $id)->update([
             'status'    => 'Confirmada'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Confirmou permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -216,6 +247,14 @@ class PermutarController extends Controller
             'dataConfirmacao'   => now(),
             'assinaturaSPO'     => Auth::user()->nome
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Autorizou permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -224,6 +263,14 @@ class PermutarController extends Controller
         DB::table('permutars')->where('id', $id)->update([
             'status'    => 'Nâo Autorizada'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Não autorizou permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -232,6 +279,14 @@ class PermutarController extends Controller
         DB::table('permutars')->where('id', $id)->update([
             'status'    => 'Refazer'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Refazer permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -243,6 +298,13 @@ class PermutarController extends Controller
             'assinaturaCMD'     => Auth::user()->nome
         ]);
 
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Autorizou permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -252,6 +314,13 @@ class PermutarController extends Controller
             'status'    => 'Nâo Autorizada',
             'optCMD'       => 'Indeferimento',
             'assinaturaCMD' => Auth::user()->nome
+        ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Não autorizou permuta',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
         ]);
 
         return redirect()->route('home');
@@ -273,6 +342,14 @@ class PermutarController extends Controller
     public function deletar($permuta)
     {
         DB::table('permutars')->where('id', $permuta)->delete();
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Deletou permuta',
+            'id_acao'       =>  $permuta->id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('permutas.index');
     }
 
@@ -322,6 +399,13 @@ class PermutarController extends Controller
 
     public function imprimir(Permutar $permuta)
     {
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Solicitou impressão permuta',
+            'id_acao'       =>  $permuta->id,
+            'data'          =>  now(),
+        ]);
+
         return view('permuta/gerar_pdf_Permuta', compact('permuta'));
     }
 }

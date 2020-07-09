@@ -42,8 +42,8 @@ class HomeController extends Controller
         //
     }
 
-    public function confirmaPermuta()
-    {
-        return redirect()->route('policial\inicio.create');
-    }
+    // public function confirmaPermuta()
+    // {
+    //     return redirect()->route('policial\inicio.create');
+    // }
 }

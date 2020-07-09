@@ -80,6 +80,7 @@ if (verificar.checked) {
     Radionao();
 }
 
+
 // function sizeImage(event) {
 
 //     var imagem = document.getElementById("sizeImage");

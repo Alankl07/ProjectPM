@@ -39,8 +39,8 @@
     </div>
 </div>
 @if($permuta->matricula == Auth::User()->matricula && $permuta->status == 'Permuta aceita')
-<a class=" btnOkPermuta btn btn-success" data-confirm='data-confirm' onclick="confirmarPermuta()" href="{{route('atualizarStatus', $permuta->id)}}" >OK</a>
-<a class=" btnRefazerPermuta btn btn-danger" data-confirm='data-confirm' onclick="confirmarPermuta()" href="{{route('refazer', $permuta->id)}}" >Refazer</a>
+<a class=" btnOkPermuta btn btn-success" data-confirm='data-confirm' href="{{route('atualizarStatus', $permuta->id)}}" >OK</a>
+<a class=" btnRefazerPermuta btn btn-danger" data-confirm='data-confirm'  href="{{route('refazer', $permuta->id)}}" >Refazer</a>
 @endif
 
 @endsection('body')

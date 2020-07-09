@@ -64,6 +64,14 @@ class DispensaController extends Controller
             $dispensa->dataConfirmacao ="";
             $dispensa->dataConfirmacaoCMD = "";
             $dispensa->save();
+
+            DB::table('logs')->insert([
+                'matricula'     =>  Auth::User()->matricula,
+                'acao'          =>  'Solicitou dispensa',
+                'id_acao'       =>  $dispensa->id,
+                'data'          =>  now(),
+            ]);
+
             return redirect()->route('dispensa.index');
         }
     }
@@ -120,6 +128,14 @@ class DispensaController extends Controller
             $dispensa->dataConfirmacao = "";
             $dispensa->dataConfirmacaoCMD = "";
             $dispensa->save();
+
+            DB::table('logs')->insert([
+                'matricula'     =>  Auth::User()->matricula,
+                'acao'          =>  'Refez dispensa',
+                'id_acao'       =>  $dispensa->id,
+                'data'          =>  now(),
+            ]);
+
             return redirect()->route('dispensa.index');
         }
     }
@@ -145,6 +161,14 @@ class DispensaController extends Controller
     public function destroy(Dispensa $dispensa)
     {
         $dispensa->delete();
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Deletou dispensa',
+            'id_acao'       =>  $dispensa->id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -171,6 +195,14 @@ class DispensaController extends Controller
             'dataConfirmacaoCMD'   => now(),
             'assinaturaSPO' => Auth::user()->nome
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Autorizou dispensa',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -179,6 +211,14 @@ class DispensaController extends Controller
         DB::table('dispensas')->where('id', $id)->update([
             'Status'    => 'Nâo Autorizada'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Não autorizou dispensa',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -187,6 +227,14 @@ class DispensaController extends Controller
         DB::table('dispensas')->where('id', $id)->update([
             'Status'    => 'Refazer'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Solicitou refazer dispensa',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -196,6 +244,13 @@ class DispensaController extends Controller
             'Status'    => 'Confirmada',
             'optCMD'       => 'Deferimento',
             'assinaturaCMD' => Auth::user()->nome
+        ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Autorizou dispensa',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
         ]);
 
         return redirect()->route('home');
@@ -209,11 +264,25 @@ class DispensaController extends Controller
             'assinaturaCMD' => Auth::user()->nome
         ]);
 
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Não autorizou dispensa',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
     public function imprimir(Dispensa $dispensa)
     {
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Solicitou impressão dispensa',
+            'id_acao'       =>  $dispensa->id,
+            'data'          =>  now(),
+        ]);
+        
         return view('dispensa/gerar_pdf_dispensa', compact('dispensa'));
     }
 }

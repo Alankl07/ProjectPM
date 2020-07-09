@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use phpDocumentor\Reflection\Types\Null_;
 
 class LoginController extends Controller
 {
@@ -41,28 +43,48 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    public function logout()
     {
-        $credenciais = $this->Validate(request(),[
-            $this->username() => 'required',
-            'password'        => 'required',  
-        ],
-        [
-            'required'              => 'Campo :attribute Obrigatório',
-            'password.required'     => 'Campo Senha é Obrigatório'
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Saiu',
+            'data'          =>  now(),
         ]);
 
-        if(Auth::attempt($credenciais))
-        {
-            if(Auth::user()->status == 'Ok'){
-                return redirect()->route('home');
-            }else{
-                Auth::logout();
-                return redirect()->back()->with('msg',"Cadastro aguardando confirmação");
-            }
 
-        }else{
-            return redirect()->back()->with('msg',"Matrícula ou Senha incorreta");
+        Auth::logout();
+
+        return redirect()->route('/');
+    }
+
+    public function login(Request $request)
+    {
+        $credenciais = $this->Validate(
+            request(),
+            [
+                $this->username() => 'required',
+                'password'        => 'required',
+            ],
+            [
+                'required'              => 'Campo :attribute Obrigatório',
+                'password.required'     => 'Campo Senha é Obrigatório'
+            ]
+        );
+
+        if (Auth::attempt($credenciais)) {
+            if (Auth::user()->status == 'Ok') {
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Entrou',
+                    'data'          =>  now(),
+                ]);
+                return redirect()->route('home');
+            } else {
+                Auth::logout();
+                return redirect()->back()->with('msg', "Cadastro aguardando confirmação");
+            }
+        } else {
+            return redirect()->back()->with('msg', "Matrícula ou Senha incorreta");
         }
     }
 

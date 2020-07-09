@@ -114,7 +114,7 @@
             <div id="SetorTela2" class="setorTela2  {{ $errors->has('setor') ? 'has-error' : '' }}">
                 <label for="setorChefe">Setor:</label>
                 <select name="setorChefe" id="patente">
-                    <option disabled selected>---SELECIONE SETOR---</option>
+                    <option disabled selected>---SELECIONE SETOR---</option>   
                     <option name="setorChefe">SPO</option>
                     <option name="setorChefe">SSO</option>
                     <option name="setorChefe">CORSET</option>

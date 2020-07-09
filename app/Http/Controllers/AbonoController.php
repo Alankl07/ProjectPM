@@ -56,6 +56,15 @@ class AbonoController extends Controller
         $abonos->assinaturaCMD = "";
         $abonos->dataConfirmacaoCMD = "";
         $abonos->save();
+
+        
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Solicitação de Abono',
+            'id_acao'       =>  $abonos->id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('abono.index');
     }
 
@@ -128,6 +137,14 @@ class AbonoController extends Controller
             'assinaturaCMD'         => "",
             'dataConfirmacaoCMD'    => "",
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Refez Abono',
+            'id_acao'       =>  $abono->id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('abono.index');
     }
 
@@ -168,6 +185,13 @@ class AbonoController extends Controller
             'dataConfirmacao'       =>      now()
         ]);
 
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Aceitou pedido de Abono',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -176,6 +200,14 @@ class AbonoController extends Controller
         DB::table('abonos')->where('id', $id)->update([
             'status'    => 'Nâo Autorizado'
         ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Pedido de Abono recusado',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -184,6 +216,14 @@ class AbonoController extends Controller
         DB::table('abonos')->where('id', $id)->update([
             'status'    => 'Refazer'
         ]);
+        
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Refazer pedido de Abono',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -195,11 +235,24 @@ class AbonoController extends Controller
             'assinaturaCMD'         => Auth::user()->nome
         ]);
 
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Pedido de Abono autorizado',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
     public function imprimir(Abono $abono)
     {
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Solicitou impressão do Abono',
+            'data'          =>  now(),
+        ]);
+
         return view('abono/gerar_pdf_abono', compact('abono'));
     }
 }

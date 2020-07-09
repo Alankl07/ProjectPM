@@ -77,6 +77,14 @@ class SuspeitoController extends Controller
                     $sus->obs = $request->input('descri');
                     $sus->status = "Ok";
                     $sus->save();
+
+                    DB::table('logs')->insert([
+                        'matricula'     =>  Auth::User()->matricula,
+                        'acao'          =>  'Cadastrou suspeito',
+                        'id_acao'       =>  $sus->cpf,
+                        'data'          =>  now(),
+                    ]);
+
                     return redirect()->route('crimes.show', $sus);
                 }
             } else {
@@ -105,6 +113,14 @@ class SuspeitoController extends Controller
                     $sus->obs = $request->input('descri');
                     $sus->status = "Pendente";
                     $sus->save();
+
+                    DB::table('logs')->insert([
+                        'matricula'     =>  Auth::User()->matricula,
+                        'acao'          =>  'Cadastrou suspeito',
+                        'id_acao'       =>  $sus->cpf,
+                        'data'          =>  now(),
+                    ]);
+
                     return redirect()->route('crimes.show', $sus);
                 }
             }
@@ -175,6 +191,14 @@ class SuspeitoController extends Controller
                 $suspeito->obs = $request->input('descri');
                 $suspeito->status = "Ok";
                 $suspeito->save();
+
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Atualizou Cadastrou suspeito',
+                    'id_acao'       =>  $suspeito->cpf,
+                    'data'          =>  now(),
+                ]);
+
                 return redirect()->route('suspeitos.index');
             } else {
                 $suspeito->nome = $request->input('nome');
@@ -195,6 +219,14 @@ class SuspeitoController extends Controller
                 $suspeito->obs = $request->input('descri');
                 $suspeito->status = "Atualização Pendente";
                 $suspeito->save();
+
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Atualizou Cadastrou suspeito',
+                    'id_acao'       =>  $suspeito->cpf,
+                    'data'          =>  now(),
+                ]);
+
                 return redirect()->route('suspeitos.index');
             }
         }
@@ -205,6 +237,13 @@ class SuspeitoController extends Controller
         DB::table('suspeitos')->where('id', $id)->update([
             'status'             =>  'Ok',
             'quantidadeCrime'    =>  1,
+        ]);
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Confirmou Cadastrou suspeito',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
         ]);
 
         return redirect()->route('suspeitos.index');
@@ -219,6 +258,14 @@ class SuspeitoController extends Controller
     public function destroy(Suspeito $suspeito)
     {
         $suspeito->delete();
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Confirmou Cadastrou suspeito',
+            'id_acao'       =>  $suspeito->cpf,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('suspeitos.index');
     }
 

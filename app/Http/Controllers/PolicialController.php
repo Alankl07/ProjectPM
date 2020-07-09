@@ -20,7 +20,7 @@ class PolicialController extends Controller
      */
     public function index()
     {   
-        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão'){
             $policial = User::all();
             return view('policial/lista_policiais', compact('policial'));
         }else{
@@ -35,7 +35,7 @@ class PolicialController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão'){
             $patente = new Patente();
             return view('policial/policial_cadastrar', compact('patente'));
         }else{
@@ -81,6 +81,13 @@ class PolicialController extends Controller
                 'password'          => bcrypt($request->senha),
             ]);
         
+            DB::table('logs')->insert([
+                'matricula'     =>  Auth::User()->matricula,
+                'acao'          =>  'Cadastrou policial',
+                'id_acao'       =>  $request->matricula,
+                'data'          =>  now(),
+            ]);
+
         return redirect()->route('home');
     }
 
@@ -92,7 +99,7 @@ class PolicialController extends Controller
      */
     public function show(User $policial)
     {
-        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major"){
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão'){
             return view('policial/registroPolicial', compact('policial'));
         }else{
             return view('erro');
@@ -107,7 +114,7 @@ class PolicialController extends Controller
      */
     public function edit(User $policial)
     {
-        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || auth()->user()->patente == "Major" || Auth::user()->matricula == $policial->matricula){
+        if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão' || Auth::user()->matricula == $policial->matricula){
             return view('policial/policialeditar', compact('policial'));
         }else{
             return view('erro');
@@ -149,6 +156,14 @@ class PolicialController extends Controller
                 $policial->password = bcrypt($request->input("senha"));
                 $policial->status = 'Ok';
                 $policial->save();
+
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Atualizou cadastro policial',
+                    'id_acao'       =>  $policial->matricula,
+                    'data'          =>  now(),
+                ]);
+
                 return redirect()->route('home');
             } else {
 
@@ -170,6 +185,14 @@ class PolicialController extends Controller
                 $policial->password = bcrypt($request->input("senha"));
                 $policial->status = 'Ok';
                 $policial->save();
+
+                DB::table('logs')->insert([
+                    'matricula'     =>  Auth::User()->matricula,
+                    'acao'          =>  'Atualizou cadastro policial',
+                    'id_acao'       =>  $policial->matricula,
+                    'data'          =>  now(),
+                ]);
+
                 return redirect()->route('home');
             }
         }
@@ -184,6 +207,14 @@ class PolicialController extends Controller
     public function destroy(User $policial)
     {
         $policial->delete();
+
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Deletou cadastro policial',
+            'id_acao'       =>  $policial->matricula,
+            'data'          =>  now(),
+        ]);
+
         return redirect()->route('home');
     }
 
@@ -200,6 +231,12 @@ class PolicialController extends Controller
             'status' => 'Ok'
         ]);
 
+        DB::table('logs')->insert([
+            'matricula'     =>  Auth::User()->matricula,
+            'acao'          =>  'Confirmou cadastro policial',
+            'id_acao'       =>  $id,
+            'data'          =>  now(),
+        ]);
 
         return redirect()->route('policial.index');
     }
