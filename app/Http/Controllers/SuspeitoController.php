@@ -275,8 +275,8 @@ class SuspeitoController extends Controller
             'nome'                  => 'required',
             'vulgo'                 => 'required',
             'foto'                  => 'required',
-            'cpf'                   => 'required',
-            'rg'                    => 'required',
+            'rg'                    => 'required | min:10',
+            'cpf'                   => 'required | min:11',
             'dataNascimento'        => 'required',
             'sexo'                  => 'required',
             'estado'                => 'required',
@@ -289,20 +289,9 @@ class SuspeitoController extends Controller
         ];
 
         $menssagens = [
-            'nome.required'                     => 'Campo Nome é obrigatório',
-            'vulgo.required'                    => 'Campo Vulgo é obrigatório',
-            'foto.required'                     => 'Campo Foto é obrigatório',
-            'cpf.required'                      => 'Campo CPF é obrigatório',
-            'rg.required'                       => 'Campo RG é obrigatório',
-            'dataNascimento.required'           => 'Campo Data de Nascimento é obrigatório',
-            'sexo.required'                     => 'Campo Sexo é obrigatório',
-            'estado.required'                   => 'Campo Estado é obrigatório',
-            'cidadesus.required'                => 'Campo Cidade é obrigatório',
-            'enderecosus.required'              => 'Campo Endereço é obrigatório',
-            'localAtuacao.required'             => 'Campo Local de Atuação é obrigatório',
-            'nomePai.required'                  => 'Campo Nome do Pai é obrigatório',
-            'nomeMae.required'                  => 'Campo Nome da Mãe é obrigatório',
-            'descri.required'                   => 'Campo OBS é obrigatório',
+            'required'                      => 'Campo obrigatório',
+            'rg.min'                        => 'Campo deve ter no minimo 10 caracter',
+            'cpf.min'                       => 'Campo deve ter no minimo 11 caracter',
         ];
 
         return Validator::make($date, $regras, $menssagens);
