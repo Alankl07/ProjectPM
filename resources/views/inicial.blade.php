@@ -58,7 +58,7 @@
                         @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefe == 'Sim' || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão')
                         <a id="dropdown" class="dropdown-item" href="{{route('index')}}">Permutas</a>
                         @endif
-                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO' |||| Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão')
+                        @if(Auth::user()->setorAtuacao == 'SPO' || Auth::user()->chefedoSetor == 'SPO' || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão')
                         <a id="dropdown" class="dropdown-item" href="{{route('policial.index')}}">Policial</a>
                         @endif
                         <a id="dropdown" class="dropdown-item" href="{{route('suspeitos.index')}}">Suspeito</a>

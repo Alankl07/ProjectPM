@@ -245,7 +245,7 @@ class PolicialController extends Controller
     {
         $regras = [
             'nome'              => 'required',
-            'matricula'         => 'required ',
+            'matricula'         => 'required | min:10 | unique:users',
             'foto'              => 'required',
             'patente'           => 'required',
             'dataNascimento'    => 'required',
@@ -253,17 +253,21 @@ class PolicialController extends Controller
             'cidade'            => 'required',
             'estado'            => 'required',
             'pelotao'           => 'required',
-            'rg'                => 'required',
-            'cpf'               => 'required',
-            'senha'             => 'required',
+            'rg'                => 'required | min:10',
+            'cpf'               => 'required | min:11',
+            'senha'             => 'required | min:6',
             'rad'               => 'required',
             'senhaConfirma'     => 'required | same:senha',
         ];
 
         $mensagens = [
-            'required'                   => 'Campo Obrigatório',
-            'matricula.unique'           => 'Matrícula já existe',
-            'same'                       => 'Senhas não coincidem '
+            'required'                  => 'Campo Obrigatório',
+            'matricula.unique'          => 'Matrícula já existe',
+            'matricula.min'             => 'Campo deve ter no minimo 10 caracter',
+            'rg.min'                    => 'Campo deve ter no minimo 10 caracter',
+            'cpf.min'                   => 'Campo deve ter no minimo 11 caracter',
+            'senha.min'                 => 'Campo deve ter no minimo 6 caracter',
+            'same'                      => 'Senhas não coincidem '
         ];
 
         return Validator::make($data, $regras, $mensagens);

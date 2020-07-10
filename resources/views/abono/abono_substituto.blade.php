@@ -50,6 +50,7 @@
                     
                 </div>
                 <a onclick="confirma()" id="btndispensa" class="btn btn-primary">Confirmar</a>
+                <a data-confirm='data-confirm'  href="{{route('refazerAbono', $abono->id)}}" id="btndispensa" class="btn btn-danger">Refazer</a>
             </div>
         </div>
         <div id="popupcx">
