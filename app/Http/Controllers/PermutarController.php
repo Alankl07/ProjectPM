@@ -18,7 +18,7 @@ class PermutarController extends Controller
 
     public function index()
     {
-        $permutas = Permutar::all();
+        $permutas = Permutar::all()->sortByDesc('id');
         return view ('permuta/listaEspera', compact('permutas'));
     }
 

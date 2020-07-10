@@ -21,7 +21,7 @@ class PolicialController extends Controller
     public function index()
     {   
         if(Auth::user()->setorAtuacao == 'SPO' || auth()->user()->chefedoSetor == "SPO" || Auth::user()->patente == 'Coronel' || Auth::user()->patente == 'Major' || Auth::user()->patente == 'Capitão'){
-            $policial = User::all();
+            $policial = User::all()->sortByDesc('id');
             return view('policial/lista_policiais', compact('policial'));
         }else{
             return view('erro');

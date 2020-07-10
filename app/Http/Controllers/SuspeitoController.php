@@ -20,8 +20,8 @@ class SuspeitoController extends Controller
      */
     public function index()
     {
-        $suspeito = Suspeito::all();
-        $crimes = Crime::all();
+        $suspeito = Suspeito::all()->sortByDesc('id');
+        $crimes = Crime::all()->sortByDesc('id');
         return view('suspeito/lista_suspeito', compact('suspeito', 'crimes'));
     }
 

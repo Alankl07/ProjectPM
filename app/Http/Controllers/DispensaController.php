@@ -17,7 +17,7 @@ class DispensaController extends Controller
      */
     public function index()
     {
-        $dispensa = Dispensa::all();
+        $dispensa = Dispensa::all()->sortByDesc('id');
         return view ('dispensa/listaDispensa', compact('dispensa'));
     }
 

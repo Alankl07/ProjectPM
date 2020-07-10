@@ -18,7 +18,7 @@ class AbonoController extends Controller
      */
     public function index()
     {
-        $abonos = Abono::all();
+        $abonos = Abono::all()->sortByDesc('id');
         return view('abono/lista_abono', compact('abonos'));
     }
 
